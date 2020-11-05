@@ -1,0 +1,16 @@
+.item {
+    color: #002137;
+}
+
+.item img {
+    width: 50px;
+    margin: 10px 5px 0px 0px;
+    border-radius: 15px 15px 0px 15px;
+    border: solid 1px black;
+}
+
+.item_like img {
+    width: 30px;
+    border: none;
+    margin-right: 5px;
+}
