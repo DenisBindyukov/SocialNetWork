@@ -1,25 +1,28 @@
 import React from "react";
 import {addNewMessageActionCreator, addPostActionCreator} from "../../../Redux/profile-reducer";
 import MyPost from "./MyPosts";
-import {StoreType} from "../../../Redux/redux-store";
+import {AppStateType} from "../../../Redux/redux-store";
+import {connect} from "react-redux";
+import {Dispatch} from "redux";
 
-type MyPostsCounterType = {
-    store: StoreType
+
+let mapStateToProps = (state: AppStateType) => {
+    return {
+        posts: state.profilePage
+    }
+};
+let mapDispatchToProps = (dispatch: Dispatch) => {
+    return {
+        onPostChange: (text: string) => {
+            dispatch(addNewMessageActionCreator(text));
+        },
+        addPost: () => {
+           dispatch(addPostActionCreator());
+        }
+    }
 }
 
-export const MyPostsContainer: React.FC<MyPostsCounterType> = (props) => {
 
-    const state = props.store.getState();
+ const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPost);
 
-    const onNewTextHandler = (text: string) => {
-        props.store.dispatch(addNewMessageActionCreator(text));
-    }
-
-    const onAddTaskHandler = () => {
-        props.store.dispatch(addPostActionCreator());
-    }
-
-    return (
-        <MyPost posts={state.profilePage} onPostChange={onNewTextHandler} addPost={onAddTaskHandler}/>
-    );
-}
+export  default MyPostsContainer;

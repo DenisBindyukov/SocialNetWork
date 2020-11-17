@@ -1,22 +1,26 @@
 import React, {ChangeEvent, KeyboardEvent} from "react";
 import Dialog from "./Dialogs";
 import {addNewMessageForDialogActionCreator, addPostForDialogsActionCreator} from "../../Redux/dialogs-reducer";
-import {StoreType} from "../../Redux/redux-store";
+import {AppStateType, StoreType} from "../../Redux/redux-store";
+import {connect} from "react-redux";
+import {Dispatch} from "redux";
 
-type DialogsContainerType = {
-    store: StoreType
+
+let mapStateToProps = (state: AppStateType) => {
+    return {
+        dialogsPage: state.dialogsPage
+    }
+};
+
+let mapDispatchToProps = (dispatch: Dispatch) => {
+    return {
+        addMessage: () => {
+            dispatch(addPostForDialogsActionCreator());
+        },
+        addText: (text: string) => {
+            dispatch(addNewMessageForDialogActionCreator(text));
+        }
+    }
 }
 
- export const DialogsContainer:React.FC<DialogsContainerType> = (props) => {
-       const store = props.store.getState();
-     const onAddMessageHandler = () => {
-         props.store.dispatch(addPostForDialogsActionCreator());
-     };
-     const onAddTextHandler = (text: string) => {
-         props.store.dispatch(addNewMessageForDialogActionCreator(text));
-     }
-
-    return (
-        <Dialog dialogsPage={store.dialogsPage} addMessage={onAddMessageHandler} addText={onAddTextHandler}/>
-    );
-}
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialog);
