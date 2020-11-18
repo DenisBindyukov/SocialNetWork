@@ -20,7 +20,7 @@ const initialState = {
         {id: 4, message: 'How many kilometers'},
         {id: 5, message: 'Wow, cool'},
         {id: 6, message: 'Are you crazy ?'}
-        ]
+    ]
 };
 
 
@@ -28,23 +28,31 @@ export const dialogsReducer = (state: dialogsPageType = initialState, action: Ac
 
     switch (action.type) {
 
-        case ADD_POST_HANDLER :
+        case ADD_POST_HANDLER : {
             let newMessage = {
-                id: 7, message: state.messageForNewPostMessage,
+                id: new Date().getTime(), message: state.messageForNewPostMessage,
             };
             let newDialog = {
-                id: 8, name: 'Denis'
+                id: new Date().getTime(), name: 'Denis'
             };
+
+            const copeState = {...state};
+
             if (state.messageForNewPostMessage) {
-                state.messages.push(newMessage);
-                state.dialogs.push(newDialog);
-                state.messageForNewPostMessage = '';
+                copeState.messages = [...state.messages];
+                copeState.messages.push(newMessage);
+                copeState.dialogs = [...state.dialogs];
+                copeState.dialogs.push(newDialog);
+                copeState.messageForNewPostMessage = '';
             }
-            return state;
+            return copeState;
+        }
 
         case ADD_NEW_MESSAGE_FOR_MESSAGE :
-            state.messageForNewPostMessage = action.message;
-            return state;
+            return {
+                ...state,
+                messageForNewPostMessage: action.message
+            };
 
         default :
             return state;

@@ -1,4 +1,3 @@
-
 import {ActionsTypes, profilePageType} from "./State";
 
 const ADD_POST = 'ADD-POST';
@@ -41,8 +40,10 @@ const initialState = {
 
 export const profileReducer = (state: profilePageType = initialState, action: ActionsTypes): profilePageType => {
 
+    let stateCopy = {...state};
     switch (action.type) {
-        case ADD_POST :
+
+        case ADD_POST : {
             let userPost = {
                 id: new Date().getTime(),
                 message: state.messageForNewPost,
@@ -51,19 +52,25 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
                 dislike: 'https://gazeta.a42.ru/uploads/15f/15f17c40-0e1a-11e8-a4af-57fa39c27bbc.jpg',
                 peopleLike: 0
             };
-            if (state.messageForNewPost) {
-                state.postDate.push(userPost);
-                state.messageForNewPost = '';
-            }
-            return state;
 
-        case ADD_NEW_MESSAGE :
-            state.messageForNewPost = action.message;
-            return state
+            if (state.messageForNewPost) {
+                stateCopy.postDate = [...state.postDate];
+                stateCopy.postDate.push(userPost);
+                stateCopy.messageForNewPost = '';
+            }
+            return stateCopy;
+        }
+
+        case ADD_NEW_MESSAGE : {
+            return {
+                ...state,
+                messageForNewPost: action.message
+            };
+        }
         default:
             return state;
     }
 }
 
 export const addPostActionCreator = () => ({type: ADD_POST} as const);
-export const addNewMessageActionCreator = (value: string) => ({type: ADD_NEW_MESSAGE, message: value}  as const);
+export const addNewMessageActionCreator = (value: string) => ({type: ADD_NEW_MESSAGE, message: value} as const);

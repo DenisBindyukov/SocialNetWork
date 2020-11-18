@@ -44,7 +44,7 @@ export type StoreType = {
 
 
 export type ActionsTypes =
-    ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof addNewMessageActionCreator>
     | ReturnType<typeof addPostForDialogsActionCreator>
     | ReturnType <typeof addNewMessageForDialogActionCreator>
