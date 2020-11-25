@@ -1,7 +1,7 @@
-import React, {ChangeEvent, KeyboardEvent} from "react";
+import React from "react";
 import Dialog from "./Dialogs";
 import {addNewMessageForDialogActionCreator, addPostForDialogsActionCreator} from "../../Redux/dialogs-reducer";
-import {AppStateType, StoreType} from "../../Redux/redux-store";
+import {AppStateType} from "../../Redux/redux-store";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 

@@ -8,11 +8,12 @@ import Setting from "./Component/Setting/Setting";
 import News from "./Component/News/News";
 import Music from "./Component/Music/Music";
 import {DialogsContainer} from "./Component/Dialogs/DialogsContainer";
+import {UserContainer} from "./Component/User/UserContainer";
 
 
 function App() {
 
-   // const state = props.store.getState();
+    // const state = props.store.getState();
 
     return (
         <div className={'app-wrapper'}>
@@ -20,9 +21,11 @@ function App() {
             <Navbar/>
             <div className={'app-wrapper-content'}>
                 <Route path={'/profile'} render={() =>
-                    <Profile />}/>
+                    <Profile/>}/>
                 <Route path={'/dialogs'} render={() =>
-                    <DialogsContainer />}/>
+                    <DialogsContainer/>}/>
+                <Route path={'/users'} render={() =>
+                    <UserContainer/>}/>
                 <Route path={'/setting'} render={() => <Setting/>}/>
                 <Route path={'/music'} render={() => <Music/>}/>
                 <Route path={'/news'} render={() => <News/>}/>

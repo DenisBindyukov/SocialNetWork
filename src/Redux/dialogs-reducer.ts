@@ -24,7 +24,7 @@ const initialState = {
 };
 
 
-export const dialogsReducer = (state: dialogsPageType = initialState, action: ActionsTypes) => {
+export const dialogsReducer = (state: dialogsPageType = initialState, action: ActionsTypes): dialogsPageType => {
 
     switch (action.type) {
 
