@@ -13,18 +13,19 @@ type ActionType =
     | ReturnType<typeof setUsersAc>
 
 
-type LocationType = {
-    country: string
-    city: string
+type PhotosType = {
+    small: any,
+    large: any
 }
 export type UserType = {
+    name: string
     id: number
+    uniqueUrlName: any,
+    photos: PhotosType
+    status: any,
     followed: boolean
-    photo: string
-    fullName: string
-    status: string
-    location: LocationType
 }
+
 export type UserReducerType = {
     user: Array<UserType>
 }

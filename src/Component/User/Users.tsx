@@ -1,12 +1,8 @@
 import React from 'react';
-import {
-    photoUserFour,
-    photoUserOne,
-    photoUserThree,
-    photoUserTwo,
-    UserReducerType, UserType
-} from "../../Redux/users-reducer";
+import {UserReducerType, UserType} from "../../Redux/users-reducer";
 import style from './User.module.css'
+import axios from 'axios'
+import userPhoto from '../../image/man-avatar-profile-vector-21372076.jpg'
 
 
 type UsersType = {
@@ -17,34 +13,20 @@ type UsersType = {
 }
 
 export const Users: React.FC<UsersType> = (props) => {
-    if (props.usersPage.user.length === 0) {
-        props.setUsers([
-            {
-                id: 1, followed: true, photo: photoUserOne, fullName: 'Denis', status: 'Junior',
-                location: {country: 'Belarus', city: 'Minsk'}
-            },
-            {
-                id: 2, followed: false, photo: photoUserTwo, fullName: 'Marya', status: 'Midl',
-                location: {country: 'Russia', city: 'Moscow'}
-            },
-            {
-                id: 3, followed: false, photo: photoUserThree, fullName: 'Katya', status: 'Signor',
-                location: {country: 'Ukraine', city: 'Kiev'}
-            },
-            {
-                id: 4, followed: true, photo: photoUserFour, fullName: 'Dimych', status: 'Signor',
-                location: {country: 'Germany', city: 'Berlin'}
-            }
-        ]);
-    }
 
+    if (props.usersPage.user.length === 0) {
+        debugger
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+            props.setUsers(response.data.items);
+        })
+    }
     return (
         <div>
             {
                 props.usersPage.user.map(u => <div key={u.id}>
                     <span>
                 <div>
-                    <img src={u.photo} className={style.photo}/>
+                    <img src={u.photos.large != null ? u.photos.large : userPhoto} className={style.photo}/>
                 </div>
                     <div>
                         {u.followed
@@ -54,13 +36,13 @@ export const Users: React.FC<UsersType> = (props) => {
                         </span>
                     <span>
                         <span>
-                            <div>{u.fullName}</div>
+                            <div>{u.name}</div>
                             <div>{u.status}</div>
                         </span>
-                        <span>
-                            <div>{u.location.country}</div>
-                            <div>{u.location.city}</div>
-                        </span>
+                        {/*<span>*/}
+                        {/*    <div>{'u.location.country'}</div>*/}
+                        {/*    <div>{'u.location.city'}</div>*/}
+                        {/*</span>*/}
                     </span>
 
                 </div>)
