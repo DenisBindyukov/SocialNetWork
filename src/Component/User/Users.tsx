@@ -12,16 +12,21 @@ type UsersType = {
     setUsers: (users: Array<UserType>) => void
 }
 
-export const Users: React.FC<UsersType> = (props) => {
+ const Users: React.FC<UsersType> = (props) => {
 
-    if (props.usersPage.user.length === 0) {
-        debugger
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-            props.setUsers(response.data.items);
-        })
+    const getUser = () => {
+        if (props.usersPage.user.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+                props.setUsers(response.data.items);
+            })
+        }
     }
+
     return (
+
         <div>
+            <button onClick={getUser}>Get User</button>
+
             {
                 props.usersPage.user.map(u => <div key={u.id}>
                     <span>

@@ -13,8 +13,6 @@ import {UserContainer} from "./Component/User/UserContainer";
 
 function App() {
 
-    // const state = props.store.getState();
-
     return (
         <div className={'app-wrapper'}>
             <Header/>
