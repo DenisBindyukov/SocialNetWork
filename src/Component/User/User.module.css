@@ -40,3 +40,17 @@ user_button:active {
     float: right;
     border: black solid 1px;
 }
+
+.pages{
+    text-align: center;
+    padding: 10px;
+    font-size: larger;
+}
+
+.pages_span {
+    margin-right: 5px;
+}
+
+.page_fatty {
+    font-weight: bold;
+}
