@@ -3,6 +3,7 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const CHANGE_VALUE_PAGE = 'CHANGE_VALUE_PAGE';
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
+const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
 
 
 type ActionType =
@@ -11,6 +12,7 @@ type ActionType =
     | ReturnType<typeof setUsersAc>
     | ReturnType<typeof changeValuePagesAC>
     | ReturnType<typeof setTotalCountAC>
+    | ReturnType<typeof toggleFetchingAC>
 
 
 type PhotosType = {
@@ -31,13 +33,15 @@ export type UserReducerType = {
     pageSize: number
     totalCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 const initialState = {
     user: [],
     pageSize: 20,
     totalCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: true
 };
 
 export const UserReducer = (state: UserReducerType = initialState, action: ActionType): UserReducerType => {
@@ -83,6 +87,12 @@ export const UserReducer = (state: UserReducerType = initialState, action: Actio
                 totalCount: action.num
             }
         }
+        case TOGGLE_FETCHING: {
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
+        }
 
         default :
             return state;
@@ -93,5 +103,6 @@ export const followAC = (userId: number) => ({type: FOLLOW, userId} as const);
 export const unfollowAC = (userId: number) => ({type: UNFOLLOW, userId} as const);
 export const setUsersAc = (users: Array<UserType>) => ({type: SET_USERS, users} as const);
 export const changeValuePagesAC = (value: number) => ({type: CHANGE_VALUE_PAGE, value} as const);
-export const setTotalCountAC  = (num: number) => ({type: SET_TOTAL_COUNT, num} as const);
+export const setTotalCountAC = (num: number) => ({type: SET_TOTAL_COUNT, num} as const);
+export const toggleFetchingAC = (isFetching: boolean) => ({type: TOGGLE_FETCHING, isFetching} as const);
 

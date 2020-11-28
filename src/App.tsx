@@ -8,7 +8,7 @@ import Setting from "./Component/Setting/Setting";
 import News from "./Component/News/News";
 import Music from "./Component/Music/Music";
 import {DialogsContainer} from "./Component/Dialogs/DialogsContainer";
-import {UserContainer} from "./Component/User/UserContainer";
+import UserContainer from "./Component/User/UserContainer";
 
 
 function App() {
