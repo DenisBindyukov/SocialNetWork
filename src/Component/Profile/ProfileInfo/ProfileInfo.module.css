@@ -1,3 +1,18 @@
 .descriptionBlock {
     padding: 10px;
 }
+.photo {
+    width: 250px;
+    height: 200px;
+    border-radius: 15px;
+    margin: 40px 10px 10px 0px ;
+}
+
+.photo_for_jod {
+    width: 150px;
+    height: 100px;
+}
+
+.styleName {
+    font-size: x-large;
+}

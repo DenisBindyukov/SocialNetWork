@@ -1,13 +1,50 @@
-import {ActionsTypes, profilePageType} from "./State";
+import {postDateType} from "./State";
 
 const ADD_POST = 'ADD-POST';
 const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE';
+const SET_USER_PROFILE =  'SET_USER_PROFILE';
+
+type ActionsTypes =
+    | ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof addNewMessageActionCreator>
+    | ReturnType<typeof setProfile>
 
 
 const man = 'https://w7.pngwing.com/pngs/7/618/png-transparent-man-illustration-avatar-icon-fashion-men-avatar-face-fashion-girl-heroes-thumbnail.png';
 const woman = 'https://image.shutterstock.com/image-vector/avatar-business-woman-wearing-colorful-600w-445305412.jpg';
 
-const initialState = {
+export type ProfileType = {
+    aboutMe: string
+    contacts: ConcatType
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    photos: photosType
+    userId: number
+
+}
+type ConcatType = {
+    facebook: string,
+    website: any,
+    vk: string,
+    twitter: string,
+    instagram: string,
+    youtube: any,
+    github: string,
+    mainLink: any
+}
+type photosType = {
+    small: string
+    large: string
+}
+type profilePageType = {
+    messageForNewPost: string
+    postDate: Array<postDateType>
+    profile: ProfileType | null
+
+}
+
+const initialState: profilePageType = {
     messageForNewPost: '',
     postDate: [
         {
@@ -34,7 +71,8 @@ const initialState = {
             dislike: 'https://gazeta.a42.ru/uploads/15f/15f17c40-0e1a-11e8-a4af-57fa39c27bbc.jpg',
             peopleLike: 246,
         },
-    ]
+    ],
+    profile: null
 };
 
 
@@ -67,6 +105,12 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
                 messageForNewPost: action.value
             };
         }
+        case SET_USER_PROFILE: {
+            return {
+                ...state,
+                profile: action.profile
+            }
+        }
         default:
             return state;
     }
@@ -74,3 +118,4 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
 
 export const addPostActionCreator = () => ({type: ADD_POST} as const);
 export const addNewMessageActionCreator = (value: string) => ({type: ADD_NEW_MESSAGE, value} as const);
+export const setProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const);

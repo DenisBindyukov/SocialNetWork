@@ -7,12 +7,12 @@ const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
 
 
 type ActionType =
-    | ReturnType<typeof followAC>
-    | ReturnType<typeof unfollowAC>
-    | ReturnType<typeof setUsersAc>
-    | ReturnType<typeof changeValuePagesAC>
-    | ReturnType<typeof setTotalCountAC>
-    | ReturnType<typeof toggleFetchingAC>
+    | ReturnType<typeof follow>
+    | ReturnType<typeof unfollow>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof changeValuePage>
+    | ReturnType<typeof setTotalCount>
+    | ReturnType<typeof toggleFetching>
 
 
 type PhotosType = {
@@ -99,10 +99,10 @@ export const UserReducer = (state: UserReducerType = initialState, action: Actio
     }
 }
 
-export const followAC = (userId: number) => ({type: FOLLOW, userId} as const);
-export const unfollowAC = (userId: number) => ({type: UNFOLLOW, userId} as const);
-export const setUsersAc = (users: Array<UserType>) => ({type: SET_USERS, users} as const);
-export const changeValuePagesAC = (value: number) => ({type: CHANGE_VALUE_PAGE, value} as const);
-export const setTotalCountAC = (num: number) => ({type: SET_TOTAL_COUNT, num} as const);
-export const toggleFetchingAC = (isFetching: boolean) => ({type: TOGGLE_FETCHING, isFetching} as const);
+export const follow = (userId: number) => ({type: FOLLOW, userId} as const);
+export const unfollow = (userId: number) => ({type: UNFOLLOW, userId} as const);
+export const setUsers = (users: Array<UserType>) => ({type: SET_USERS, users} as const);
+export const changeValuePage = (value: number) => ({type: CHANGE_VALUE_PAGE, value} as const);
+export const setTotalCount= (num: number) => ({type: SET_TOTAL_COUNT, num} as const);
+export const toggleFetching  = (isFetching: boolean) => ({type: TOGGLE_FETCHING, isFetching} as const);
 

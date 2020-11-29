@@ -114,7 +114,7 @@ let store: StoreType = {
     },
     dispatch(action) {
 
-        profileReducer(this._state.profilePage, action);
+        // profileReducer(this._state.profilePage, action);
         dialogsReducer(this._state.dialogsPage, action);
         sidebarReducer(this._state.sidebar, action);
 
