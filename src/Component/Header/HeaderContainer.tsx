@@ -1,42 +1,66 @@
 import React from "react";
-import Header from "./Header";
 import {connect} from "react-redux";
 import axios from "axios";
-import {authReducerType, setAuthUserDate} from "../../Redux/auth-reducer";
+import {logOffAuthAC, setAuthUserDate} from "../../Redux/auth-reducer";
 import {AppStateType} from "../../Redux/redux-store";
+import {Header} from "./Header";
+import {Dispatch} from "redux";
 
-type OwnPropsType =  MapDispatchType & MapStateType
+type OwnProps = {
+
+
+}
+type OwnPropsType = MapDispatchType & MapStateType
 type PropsType = OwnPropsType
 
 class HeaderContainer extends React.Component<PropsType> {
-componentDidMount() {
+    componentDidMount() {
 
-    axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`)
-        .then(response => {
-            if(response.data.resultCode === 0) {
-             this.props
-            }
-        });
-}
+        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
+            withCredentials: true
+        })
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    const {id, email, login} = response.data.data
+                    this.props.authUserDate(id, email, login);
+                }
+            });
+    }
 
     render() {
-    return <Header {...this.props} />
+        return <Header {...this.props} />
     }
 }
 
- type MapStateType = {
-     auth: authReducerType | null
+type MapStateType = {
+    isAuth: boolean
+    login: string | null
 }
 
 type MapDispatchType = {
-    setAuthUserDate: (obj: authReducerType) => void
+    authUserDate: (userId: number, email: string, login: string) => void
+    logOff: (value: boolean) => void
 }
 
 const mapStateToProps = (state: AppStateType): MapStateType => {
     return {
-        auth: state.auth
+        isAuth: state.auth.isAuth,
+        login: state.auth.login
     }
 }
 
-    export default connect<any>(mapStateToProps, {setAuthUserDate})
-    (HeaderContainer);
+let mapDispatchToProps = (dispatch: Dispatch) => {
+    return {
+
+        authUserDate: (userId: number, email: string, login: string) => {
+            dispatch(setAuthUserDate(userId, email, login));
+        },
+
+        logOff: (value: boolean) => {
+            dispatch(logOffAuthAC(value));
+        }
+    }
+}
+
+export default connect<MapStateType, MapDispatchType, OwnProps, AppStateType>(mapStateToProps, mapDispatchToProps)
+(HeaderContainer);
