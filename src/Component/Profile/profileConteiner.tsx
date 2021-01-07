@@ -20,7 +20,6 @@ type PropsType = RouteComponentProps<PatchParamsType> & OwnPropsType
 export class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
-
         let userId = this.props.match.params.userId
         if(!userId) userId ='2';
 
@@ -40,12 +39,6 @@ export class ProfileContainer extends React.Component<PropsType> {
 }
 
 
-const mapStateToProps = (state: AppStateType): MapStateType => {
-    return {
-        profilePage: state.profilePage.profile
-    }
-}
-
 export type MapStateType = {
     profilePage: ProfileType | null
 }
@@ -54,7 +47,14 @@ type MapDispatchType = {
     setProfile: (obj: ProfileType) => void
 }
 
+const mapStateToProps = (state: AppStateType): MapStateType => {
+    return {
+        profilePage: state.profilePage.profile
+    }
+}
 
-export default  connect<MapStateType, MapDispatchType, OwnProps, AppStateType>(mapStateToProps, {
-    setProfile
-})(withRouter(ProfileContainer));
+
+let WithUrlDataContainerComponent = withRouter(ProfileContainer);
+
+export default  connect<MapStateType, MapDispatchType, OwnProps, AppStateType>(mapStateToProps, {setProfile})
+(WithUrlDataContainerComponent);

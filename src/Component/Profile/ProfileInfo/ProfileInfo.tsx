@@ -4,10 +4,11 @@ import {Preloader} from "../../User/Preloader/Preload";
 import userPhoto from '../../../image/man-avatar-profile-vector-21372076.jpg';
 import workTrue from '../../../image/images true work.jpg';
 import workFalse from '../../../image/unnamed false work.jpg';
+import {ProfileType} from "../../../Redux/profile-reducer";
 
 
 type ProfileInfoType = {
-    profile: any
+    profile: ProfileType
 }
 
 const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
@@ -28,11 +29,11 @@ const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
                      className={style.photo}/>
                      <span className={style.styleName}> Full Name: {props.profile.fullName}</span>
                      <div>
-                         <span>
+                         <div>
                              <h2>About Me: {props.profile.aboutMe}</h2>
                              <img src={props.profile.lookingForAJob ? workTrue : workFalse}
                                    className={style.photo_for_jod}/>
-                             <span> <li>Description of the desired position:</li> {props.profile.lookingForAJobDescription} </span>
+                              <h3>Description of the desired position: {props.profile.lookingForAJobDescription}</h3>
                              <p>Contacts to contact me ->
                                  <li> <a href={props.profile.contacts.facebook}>Facebook</a> </li>
                                  <li> <a href={props.profile.contacts.instagram}>Instagram</a> </li>
@@ -40,8 +41,7 @@ const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
                                  <li> <a href={props.profile.contacts.vk}>Vk</a> </li>
                                  <li> <a href={props.profile.contacts.github}>Git Hub</a> </li>
                              </p>
-
-                         </span>
+                         </div>
                      </div>
             </div>
         </div>
