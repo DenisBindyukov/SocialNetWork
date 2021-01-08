@@ -4,7 +4,7 @@ const SET_USERS = 'SET_USERS';
 const CHANGE_VALUE_PAGE = 'CHANGE_VALUE_PAGE';
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
 const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
-
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE-IS-FOLLOWING-PROGRESS';
 
 type ActionType =
     | ReturnType<typeof follow>
@@ -13,6 +13,7 @@ type ActionType =
     | ReturnType<typeof changeValuePage>
     | ReturnType<typeof setTotalCount>
     | ReturnType<typeof toggleFetching>
+    | ReturnType<typeof toggleFollowingProgress>
 
 
 type PhotosType = {
@@ -34,14 +35,16 @@ export type UserReducerType = {
     totalCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: Array<number>
 }
 
-const initialState = {
+const initialState: UserReducerType = {
     user: [],
     pageSize: 20,
     totalCount: 0,
     currentPage: 1,
-    isFetching: true
+    isFetching: true,
+    followingInProgress: []
 };
 
 export const UserReducer = (state: UserReducerType = initialState, action: ActionType): UserReducerType => {
@@ -93,6 +96,14 @@ export const UserReducer = (state: UserReducerType = initialState, action: Actio
                 isFetching: action.isFetching
             }
         }
+        case TOGGLE_IS_FOLLOWING_PROGRESS: {
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id != action.userId)
+            }
+        }
 
         default :
             return state;
@@ -105,4 +116,5 @@ export const setUsers = (users: Array<UserType>) => ({type: SET_USERS, users} as
 export const changeValuePage = (value: number) => ({type: CHANGE_VALUE_PAGE, value} as const);
 export const setTotalCount= (num: number) => ({type: SET_TOTAL_COUNT, num} as const);
 export const toggleFetching  = (isFetching: boolean) => ({type: TOGGLE_FETCHING, isFetching} as const);
+export const toggleFollowingProgress  = (isFetching: boolean, userId: number) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId} as const);
 
