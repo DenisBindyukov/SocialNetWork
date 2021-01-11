@@ -10,7 +10,6 @@ type HeaderType = {
 
 export const Header: React.FC<HeaderType> = (props) => {
 
-
     return (
         <div className={style.header}>
             <img src="https://i.ytimg.com/vi/ILxgWFYLtTQ/maxresdefault.jpg" alt=""/>
