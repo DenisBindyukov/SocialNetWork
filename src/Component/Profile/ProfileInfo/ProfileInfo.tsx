@@ -5,17 +5,22 @@ import userPhoto from '../../../image/man-avatar-profile-vector-21372076.jpg';
 import workTrue from '../../../image/images true work.jpg';
 import workFalse from '../../../image/unnamed false work.jpg';
 import {ProfileType} from "../../../Redux/profile-reducer";
+import {Redirect} from "react-router";
 
 
 type ProfileInfoType = {
     profile: ProfileType | null
+    isAuth: boolean
 }
 
 const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
 
+    if (!props.isAuth) return <Redirect to={'/login'}/>
+
     if(!props.profile) {
        return <Preloader/>
     }
+
 
     return (
         <div>

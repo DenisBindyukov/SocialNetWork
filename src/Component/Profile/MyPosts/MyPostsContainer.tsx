@@ -8,7 +8,8 @@ import {Dispatch} from "redux";
 
 let mapStateToProps = (state: AppStateType) => {
     return {
-        posts: state.profilePage
+        posts: state.profilePage,
+        isAuth: state.auth.isAuth
     }
 };
 let mapDispatchToProps = (dispatch: Dispatch) => {

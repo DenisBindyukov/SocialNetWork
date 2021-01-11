@@ -2,15 +2,16 @@ import React from 'react';
 import {UserType} from "../../Redux/users-reducer";
 import style from './User.module.css'
 import userPhoto from '../../image/man-avatar-profile-vector-21372076.jpg'
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 
 type UsersType = {
     users: Array<UserType>
+    isAuth: boolean
     pageSize: number
     totalCount: number
     currentPage: number
     followingInProgress: number[]
-    follow:   (userId: number) => void
+    follow: (userId: number) => void
     unfollow: (userId: number) => void
     onPageChanged: (value: number) => void
     toggleFollowingProgress: (isFetching: boolean, userId: number) => void
@@ -25,6 +26,7 @@ export const Users: React.FC<UsersType> = (props) => {
         pages.push(i);
     }
 
+    if (!props.isAuth) return <Redirect to={'/login'}/>
 
     return (
         <div>
@@ -50,7 +52,7 @@ export const Users: React.FC<UsersType> = (props) => {
                 </div>
                     <div>
                         {u.followed
-                            ? <button className={ style.user_button}
+                            ? <button className={style.user_button}
                                       disabled={props.followingInProgress.some(id => id === u.id)}
                                       onClick={() => props.unfollow(u.id)}>Unfollow</button>
                             : <button className={style.user_button}

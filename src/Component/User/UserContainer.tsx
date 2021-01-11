@@ -54,6 +54,7 @@ class UserContainer extends React.Component<PropsType> {
                    followingInProgress={this.props.followingInProgress}
                    onPageChanged={this.onPageChanged}
                    toggleFollowingProgress={this.props.toggleFollowingProgress}
+                   isAuth={this.props.isAuth}
                    />
         </>
         );
@@ -62,6 +63,7 @@ class UserContainer extends React.Component<PropsType> {
 
 const mapStateToProps = (state: AppStateType): MapStateType => {
     return {
+        isAuth: state.auth.isAuth,
         users: state.usersPage.user,
         pageSize: state.usersPage.pageSize,
         totalCount: state.usersPage.totalCount,
@@ -95,6 +97,7 @@ const mapStateToProps = (state: AppStateType): MapStateType => {
 
 type MapStateType = {
     users: Array<UserType>
+    isAuth: boolean
     pageSize: number
     totalCount: number
     currentPage: number

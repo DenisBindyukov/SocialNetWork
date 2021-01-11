@@ -9,6 +9,7 @@ import UserContainer from "./Component/User/UserContainer";
 import ProfileContainer from "./Component/Profile/profileConteiner";
 import HeaderContainer from "./Component/Header/HeaderContainer";
 import Navbar from "./Component/Navbar.tsx/Navbar";
+import {Login} from "./Component/Login/Login";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                 <Route path={'/setting'} render={() => <Setting/>}/>
                 <Route path={'/music'} render={() => <Music/>}/>
                 <Route path={'/news'} render={() => <News/>}/>
+                <Route path={'/login'} render={() => <Login/>}/>
             </div>
         </div>
     );

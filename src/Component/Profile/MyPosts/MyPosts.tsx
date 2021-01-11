@@ -2,12 +2,14 @@ import React, {ChangeEvent, KeyboardEvent} from "react";
 import style from './MyPosts.module.css'
 import Post from "./Posts/Posts";
 import {profilePageType} from "../../../Redux/State";
+import {Redirect} from "react-router";
 
 
 type MyPostType = {
     posts: profilePageType
     onPostChange: (text: string) => void
     addPost: () => void
+    isAuth: boolean
 }
 
 const MyPost: React.FC<MyPostType> = (props) => {
@@ -29,6 +31,8 @@ const MyPost: React.FC<MyPostType> = (props) => {
             e.preventDefault();
         }
     }
+
+    if (!props.isAuth) return <Redirect to={`/login`}/>
 
     return (
         <div>
