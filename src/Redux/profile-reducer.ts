@@ -1,4 +1,5 @@
-import {postDateType} from "./State";
+import {Dispatch} from "redux";
+import {userRequest} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
 const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE';
@@ -12,6 +13,16 @@ type ActionsTypes =
 
 const man = 'https://w7.pngwing.com/pngs/7/618/png-transparent-man-illustration-avatar-icon-fashion-men-avatar-face-fashion-girl-heroes-thumbnail.png';
 const woman = 'https://image.shutterstock.com/image-vector/avatar-business-woman-wearing-colorful-600w-445305412.jpg';
+
+
+ type postDateType = {
+    id: number
+    message: string
+    picture: string
+    like: string
+    dislike: string
+    peopleLike: number
+}
 
 export type ProfileType = {
     aboutMe: string
@@ -119,3 +130,11 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
 export const addPostActionCreator = () => ({type: ADD_POST} as const);
 export const addNewMessageActionCreator = (value: string) => ({type: ADD_NEW_MESSAGE, value} as const);
 export const setProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const);
+
+export const getUsers = (userId: string) => (dispatch: Dispatch) => {
+
+    userRequest.getUsers(userId)
+        .then(response => {
+            dispatch(setProfile(response));
+        });
+}

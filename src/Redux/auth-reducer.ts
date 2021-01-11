@@ -1,9 +1,12 @@
+import {Dispatch} from "redux";
+import {authRequest} from "../api/api";
+
 const SET_USER_DATE = 'SET-USER-DATE';
 const LOG_OFF_AUTH = 'LOG-OFF-AUTH';
 
 type ActionsTypes =
     | ReturnType<typeof setAuthUserDate>
-    | ReturnType<typeof logOffAuthAC>
+    | ReturnType<typeof logOffAuth>
 
 
 export type authReducerType = {
@@ -44,5 +47,15 @@ export const authReducer = (state: authReducerType = initialState, action: Actio
 }
 
 export const setAuthUserDate = (userId: number, email: string, login: string) => ({type: SET_USER_DATE, date: {id:userId, email, login}} as const);
-export const logOffAuthAC = (value: boolean) => ( {type: LOG_OFF_AUTH, value} as const);
+export const logOffAuth = (value: boolean) => ( {type: LOG_OFF_AUTH, value} as const);
+
+export const auth = () => (dispatch: Dispatch) => {
+    authRequest.auth()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                const {id, email, login} = response.data.data
+                dispatch(setAuthUserDate(id, email, login));
+            }
+        });
+}
 

@@ -2,8 +2,7 @@ import React, {ChangeEvent, KeyboardEvent} from "react";
 import style from './Dialogs.module.css';
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
-import {ActionsTypes, dialogsPageType} from "../../Redux/State";
-import {addNewMessageForDialogActionCreator, addPostForDialogsActionCreator} from "../../Redux/dialogs-reducer";
+import {dialogsPageType} from "../../Redux/State";
 
 type DialogsType = {
     dialogsPage: dialogsPageType
@@ -16,7 +15,6 @@ const Dialog: React.FC<DialogsType> = (props) => {
 
     const users = props.dialogsPage.dialogs.map(el => <DialogItem id={el.id} name={el.name}/>);
     const postElement = props.dialogsPage.messages.map(el => <Message message={el.message} id={el.id}/>);
-    const newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const addMessageHandler = () => {
         props.addMessage();

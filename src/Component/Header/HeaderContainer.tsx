@@ -1,30 +1,19 @@
 import React from "react";
 import {connect} from "react-redux";
-import axios from "axios";
-import {logOffAuthAC, setAuthUserDate} from "../../Redux/auth-reducer";
+import {auth, logOffAuth} from "../../Redux/auth-reducer";
 import {AppStateType} from "../../Redux/redux-store";
 import {Header} from "./Header";
-import {Dispatch} from "redux";
-
-type OwnProps = {
 
 
-}
+type OwnProps = {}
 type OwnPropsType = MapDispatchType & MapStateType
 type PropsType = OwnPropsType
 
 class HeaderContainer extends React.Component<PropsType> {
+
     componentDidMount() {
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-            withCredentials: true
-        })
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    const {id, email, login} = response.data.data
-                    this.props.authUserDate(id, email, login);
-                }
-            });
+        this.props.auth();
     }
 
     render() {
@@ -38,8 +27,8 @@ type MapStateType = {
 }
 
 type MapDispatchType = {
-    authUserDate: (userId: number, email: string, login: string) => void
-    logOff: (value: boolean) => void
+    logOffAuth: (value: boolean) => void
+    auth: () => void
 }
 
 const mapStateToProps = (state: AppStateType): MapStateType => {
@@ -49,18 +38,16 @@ const mapStateToProps = (state: AppStateType): MapStateType => {
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
+// let mapDispatchToProps = (dispatch: Dispatch) => {
+//     return {
+//         auth: () => {
+//
+//         },
+//         logOff: (value: boolean) => {
+//             dispatch(logOffAuthAC(value));
+//         }
+//     }
+// }
 
-        authUserDate: (userId: number, email: string, login: string) => {
-            dispatch(setAuthUserDate(userId, email, login));
-        },
-
-        logOff: (value: boolean) => {
-            dispatch(logOffAuthAC(value));
-        }
-    }
-}
-
-export default connect<MapStateType, MapDispatchType, OwnProps, AppStateType>(mapStateToProps, mapDispatchToProps)
+export default connect<MapStateType, MapDispatchType, OwnProps, AppStateType>(mapStateToProps,{logOffAuth,auth})
 (HeaderContainer);
