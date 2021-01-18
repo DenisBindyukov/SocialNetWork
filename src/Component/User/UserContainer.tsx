@@ -9,6 +9,7 @@ import {
 } from "../../Redux/users-reducer";
 import {Users} from "./Users";
 import {Preloader} from "./Preloader/Preload";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 type OwnProps = {
@@ -44,7 +45,6 @@ class UserContainer extends React.Component<PropsType> {
                    followingInProgress={this.props.followingInProgress}
                    onPageChanged={this.onPageChanged}
                    toggleFollowingProgress={this.props.toggleFollowingProgress}
-                   isAuth={this.props.isAuth}
                    />
         </>
         );
@@ -104,11 +104,13 @@ type MapDispatchType = {
 }
 
 
+const AuthRedirectComponent = withAuthRedirect(UserContainer)
+
 export default connect<MapStateType, MapDispatchType, OwnProps, AppStateType>(mapStateToProps, {
     changeValuePage,
     follow,
     unfollow,
     toggleFollowingProgress,
     getUsers
-})(UserContainer);
+})(AuthRedirectComponent);
 

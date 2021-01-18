@@ -6,7 +6,6 @@ import {ProfileType} from "../../Redux/profile-reducer";
 
 type ProfilePageType = {
     profile: ProfileType | null
-    isAuth: boolean
 }
 
 const Profile: React.FC<ProfilePageType> = (props) => {

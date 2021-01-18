@@ -9,7 +9,6 @@ type DialogsType = {
     dialogsPage: dialogsPageType
     addMessage: () => void
     addText: (text: string) => void
-    isAuth: boolean
 }
 
 
@@ -30,7 +29,6 @@ const Dialog: React.FC<DialogsType> = (props) => {
             event.preventDefault();
         }
     }
-     if (!props.isAuth) return <Redirect to={'/login'}/>
 
     return (
         <div className={style.dialogs}>

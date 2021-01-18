@@ -10,7 +10,6 @@ import {Redirect} from "react-router";
 
 type ProfileInfoType = {
     profile: ProfileType | null
-    isAuth: boolean
 }
 
 const ProfileInfo: React.FC<ProfileInfoType> = (props) => {

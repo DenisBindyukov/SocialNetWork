@@ -6,7 +6,6 @@ import {NavLink, Redirect} from "react-router-dom";
 
 type UsersType = {
     users: Array<UserType>
-    isAuth: boolean
     pageSize: number
     totalCount: number
     currentPage: number
@@ -26,7 +25,6 @@ export const Users: React.FC<UsersType> = (props) => {
         pages.push(i);
     }
 
-    if (!props.isAuth) return <Redirect to={'/login'}/>
 
     return (
         <div>

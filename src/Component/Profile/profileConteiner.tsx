@@ -3,7 +3,7 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/redux-store";
 import {getUsers, ProfileType, setProfile} from "../../Redux/profile-reducer";
-import {Redirect, RouteComponentProps, withRouter} from "react-router";
+import { RouteComponentProps, withRouter} from "react-router";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
@@ -42,8 +42,7 @@ let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
 
 
 export type MapStateType = {
-    profilePage: ProfileType | null,
-    isAuth: boolean
+    profilePage: ProfileType | null
 }
 
 type MapDispatchType = {
@@ -53,8 +52,7 @@ type MapDispatchType = {
 
 const mapStateToProps = (state: AppStateType): MapStateType => {
     return {
-        profilePage: state.profilePage.profile,
-        isAuth: state.auth.isAuth
+        profilePage: state.profilePage.profile
     }
 }
 
