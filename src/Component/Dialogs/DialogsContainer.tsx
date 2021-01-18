@@ -4,16 +4,28 @@ import {addNewMessageForDialogActionCreator, addPostForDialogsActionCreator} fro
 import {AppStateType} from "../../Redux/redux-store";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
+import {Redirect} from "react-router";
+import {dialogsPageType} from "../../Redux/State";
 
 
-let mapStateToProps = (state: AppStateType) => {
+type mapDispatchToProps = {
+    addMessage: () => void
+    addText: (text: string) => void
+}
+
+type mapStateToProps = {
+    dialogsPage: dialogsPageType
+    isAuth: boolean
+}
+
+let mapStateToProps = (state: AppStateType): mapStateToProps => {
     return {
         dialogsPage: state.dialogsPage,
         isAuth: state.auth.isAuth
     }
 };
 
-let mapDispatchToProps = (dispatch: Dispatch) => {
+let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToProps => {
     return {
         addMessage: () => {
             dispatch(addPostForDialogsActionCreator());
@@ -24,4 +36,10 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
     }
 }
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialog);
+let AuthRedirectComponent = (props: mapStateToProps & mapDispatchToProps) => {
+    if (!props.isAuth) return <Redirect to={'/login'}/>
+    return <Dialog {...props} />
+}
+
+
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);

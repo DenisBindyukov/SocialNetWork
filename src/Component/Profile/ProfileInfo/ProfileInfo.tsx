@@ -15,8 +15,6 @@ type ProfileInfoType = {
 
 const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
 
-    if (!props.isAuth) return <Redirect to={'/login'}/>
-
     if(!props.profile) {
        return <Preloader/>
     }
