@@ -10,6 +10,7 @@ import {
 import {Users} from "./Users";
 import {Preloader} from "./Preloader/Preload";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 type OwnProps = {
@@ -51,17 +52,7 @@ class UserContainer extends React.Component<PropsType> {
     }
 }
 
-const mapStateToProps = (state: AppStateType): MapStateType => {
-    return {
-        isAuth: state.auth.isAuth,
-        users: state.usersPage.user,
-        pageSize: state.usersPage.pageSize,
-        totalCount: state.usersPage.totalCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
-    }
-};
+
 // const mapDispatchToProps = (dispatch: Dispatch) => {
 //     return {
 //         follow: (userId: number) => {
@@ -103,14 +94,28 @@ type MapDispatchType = {
     getUsers: (currentPage: number, pageSize: number) => void
 }
 
+const mapStateToProps = (state: AppStateType): MapStateType => {
+    return {
+        isAuth: state.auth.isAuth,
+        users: state.usersPage.user,
+        pageSize: state.usersPage.pageSize,
+        totalCount: state.usersPage.totalCount,
+        currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
+    }
+};
 
-const AuthRedirectComponent = withAuthRedirect(UserContainer)
-
-export default connect<MapStateType, MapDispatchType, OwnProps, AppStateType>(mapStateToProps, {
-    changeValuePage,
-    follow,
-    unfollow,
-    toggleFollowingProgress,
-    getUsers
-})(AuthRedirectComponent);
+export default compose<React.ComponentType>(
+    connect<MapStateType, MapDispatchType, OwnProps, AppStateType>(mapStateToProps,
+        {
+        changeValuePage,
+        follow,
+        unfollow,
+        toggleFollowingProgress,
+        getUsers
+        }),
+    withAuthRedirect
+)
+(UserContainer);
 
