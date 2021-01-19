@@ -4,12 +4,14 @@ import {Preloader} from "../../User/Preloader/Preload";
 import userPhoto from '../../../image/man-avatar-profile-vector-21372076.jpg';
 import workTrue from '../../../image/images true work.jpg';
 import workFalse from '../../../image/unnamed false work.jpg';
-import {ProfileType} from "../../../Redux/profile-reducer";
 import {ProfileStatus} from "./ProfileStatus";
+import {ProfileType} from "../../../api/api";
 
 
 type ProfileInfoType = {
+    status: string
     profile: ProfileType | null
+    upDateUserStatus: (status: string) => void
 }
 
 const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
@@ -28,7 +30,7 @@ const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
             <div className={style.descriptionBlock}>
                 <img src={props.profile.photos.large ? props.profile.photos.large : userPhoto}
                      className={style.photo}/>
-                <ProfileStatus status={'Hello world !!!'}/>
+                <ProfileStatus status={props.status} upDateUserStatus={props.upDateUserStatus}/>
                 <span className={style.styleName}> Full Name: {props.profile.fullName}</span>
                 <div>
                     <div>

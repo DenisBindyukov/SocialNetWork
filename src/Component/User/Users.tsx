@@ -1,8 +1,8 @@
 import React from 'react';
-import {UserType} from "../../Redux/users-reducer";
 import style from './User.module.css'
 import userPhoto from '../../image/man-avatar-profile-vector-21372076.jpg'
-import {NavLink, Redirect} from "react-router-dom";
+import {NavLink} from "react-router-dom";
+import {UserType} from "../../api/api";
 
 type UsersType = {
     users: Array<UserType>

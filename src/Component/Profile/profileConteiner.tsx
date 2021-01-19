@@ -2,10 +2,11 @@ import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/redux-store";
-import {getUsers, ProfileType, setProfile} from "../../Redux/profile-reducer";
+import {getUser, getUserStatus, setProfile, upDateUserStatus} from "../../Redux/profile-reducer";
 import { RouteComponentProps, withRouter} from "react-router";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {ProfileType} from "../../api/api";
 
 
 type OwnProps = {
@@ -22,35 +23,42 @@ export class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         let userId = this.props.match.params.userId
-        if(!userId) userId ='2';
-        this.props.getUsers(userId);
+        if(!userId) userId ='12551 ';
+        this.props.getUser(+userId);
+        this.props.getUserStatus(+userId);
     }
 
     render() {
         return (
-                <Profile {...this.props} profile={this.props.profilePage}/>
+                <Profile {...this.props} status={this.props.status} profile={this.props.profilePage}/>
         );
     }
 }
 
 
 export type MapStateType = {
+    status: string
     profilePage: ProfileType | null
 }
 
 type MapDispatchType = {
     setProfile: (obj: ProfileType) => void
-    getUsers: (userId: string) => void
+    getUser: (userId: number) => void
+    getUserStatus: (userId: number) => void
+    upDateUserStatus: (status: string) => void
 }
 
 const mapStateToProps = (state: AppStateType): MapStateType => {
     return {
+        status: state.profilePage.status,
         profilePage: state.profilePage.profile
     }
 }
 
 export default compose<React.ComponentType>(
-    connect<MapStateType, MapDispatchType, OwnProps, AppStateType>(mapStateToProps, {setProfile, getUsers}),
+    connect<MapStateType, MapDispatchType, OwnProps, AppStateType>(mapStateToProps, {
+        setProfile, getUser,getUserStatus,upDateUserStatus
+    }),
     withRouter,
 withAuthRedirect
 )(ProfileContainer);

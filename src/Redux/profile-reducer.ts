@@ -1,14 +1,16 @@
 import {Dispatch} from "redux";
-import {userRequest} from "../api/api";
+import {profileAPI, ProfileType} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
 const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE';
 const SET_USER_PROFILE =  'SET_USER_PROFILE';
+const SET_STATUS =  'SET-STATUS';
 
 type ActionsTypes =
     | ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof addNewMessageActionCreator>
     | ReturnType<typeof setProfile>
+    | ReturnType<typeof setStatus>
 
 
 const man = 'https://w7.pngwing.com/pngs/7/618/png-transparent-man-illustration-avatar-icon-fashion-men-avatar-face-fashion-girl-heroes-thumbnail.png';
@@ -24,38 +26,15 @@ const woman = 'https://image.shutterstock.com/image-vector/avatar-business-woman
     peopleLike: number
 }
 
-export type ProfileType = {
-    aboutMe: string
-    contacts: ConcatType
-    fullName: string
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    photos: photosType
-    userId: number
-
-}
-type ConcatType = {
-    facebook: string,
-    website: any,
-    vk: string,
-    twitter: string,
-    instagram: string,
-    youtube: any,
-    github: string,
-    mainLink: any
-}
-type photosType = {
-    small: string
-    large: string
-}
 type profilePageType = {
+     status: string
     messageForNewPost: string
     postDate: Array<postDateType>
     profile: ProfileType | null
-
 }
 
 const initialState: profilePageType = {
+     status: 'Change status',
     messageForNewPost: '',
     postDate: [
         {
@@ -122,6 +101,12 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
                 profile: action.profile
             }
         }
+        case SET_STATUS: {
+            return {
+                ...state,
+                status: action.status || state.status
+            }
+        }
         default:
             return state;
     }
@@ -130,11 +115,27 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
 export const addPostActionCreator = () => ({type: ADD_POST} as const);
 export const addNewMessageActionCreator = (value: string) => ({type: ADD_NEW_MESSAGE, value} as const);
 export const setProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const);
+export const setStatus = (status: string) => ({type: SET_STATUS, status} as const);
 
-export const getUsers = (userId: string) => (dispatch: Dispatch) => {
+export const getUser = (userId: number) => (dispatch: Dispatch) => {
 
-    userRequest.getUsers(userId)
+    profileAPI.getUser(userId)
         .then(response => {
-            dispatch(setProfile(response));
+            dispatch(setProfile(response))
         });
-}
+};
+export const getUserStatus = (userId: number) => (dispatch: Dispatch) => {
+    profileAPI.getUserStatus(userId)
+        .then(response => {
+            dispatch(setStatus(response))
+        });
+};
+
+export const upDateUserStatus = (status: string) => (dispatch: Dispatch) => {
+    profileAPI.updateUserStatus(status)
+        .then(response => {
+            if(response.data.resultCode === 0) {
+                dispatch(setStatus(status))
+            }
+        });
+};

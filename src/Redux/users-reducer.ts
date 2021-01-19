@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {apiRequest} from "../api/api";
+import {apiRequest, UserType} from "../api/api";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -19,18 +19,7 @@ type ActionType =
     | ReturnType<typeof toggleFollowingProgress>
 
 
-type PhotosType = {
-    small: any,
-    large: any
-}
-export type UserType = {
-    name: string
-    id: number
-    uniqueUrlName: any,
-    photos: PhotosType
-    status: any,
-    followed: boolean
-}
+
 
 export type UserReducerType = {
     user: Array<UserType>
@@ -124,14 +113,12 @@ export const toggleFollowingProgress  = (isFetching: boolean, userId: number) =>
 export const getUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
 
     dispatch(toggleFetching(true));
-
     apiRequest.getUsers(currentPage, pageSize).then(data => {
         dispatch(toggleFetching(false));
         dispatch(setUsers(data.items));
         dispatch(setTotalCount(data.totalCount));
     })
-
-}
+};
 
 export const unfollow = (userId: number) => (dispatch: Dispatch) => {
 
@@ -143,7 +130,7 @@ export const unfollow = (userId: number) => (dispatch: Dispatch) => {
                 }
                 dispatch(toggleFollowingProgress(false, userId));
             })
-}
+};
 
 export const follow = (userId: number) => (dispatch: Dispatch) => {
 
@@ -155,4 +142,4 @@ export const follow = (userId: number) => (dispatch: Dispatch) => {
             }
            dispatch(toggleFollowingProgress(false, userId));
         })
-}
+};

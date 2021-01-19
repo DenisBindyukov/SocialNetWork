@@ -5,12 +5,13 @@ import {
     changeValuePage,
     getUsers,
     toggleFollowingProgress,
-    UserType, unfollow, follow
+     unfollow, follow
 } from "../../Redux/users-reducer";
 import {Users} from "./Users";
 import {Preloader} from "./Preloader/Preload";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {UserType} from "../../api/api";
 
 
 type OwnProps = {
