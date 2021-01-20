@@ -5,6 +5,7 @@ import {ProfileType} from "../../api/api";
 
 
 type ProfilePageType = {
+    preloader: boolean
     status: string
     profile: ProfileType | null
     upDateUserStatus: (status: string) => void

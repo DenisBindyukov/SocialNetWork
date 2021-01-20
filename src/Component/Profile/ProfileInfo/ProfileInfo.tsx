@@ -9,6 +9,7 @@ import {ProfileType} from "../../../api/api";
 
 
 type ProfileInfoType = {
+    preloader:boolean
     status: string
     profile: ProfileType | null
     upDateUserStatus: (status: string) => void
@@ -19,7 +20,6 @@ const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
     if (!props.profile) {
         return <Preloader/>
     }
-
     return (
         <div>
             {/*<div>*/}
@@ -30,7 +30,7 @@ const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
             <div className={style.descriptionBlock}>
                 <img src={props.profile.photos.large ? props.profile.photos.large : userPhoto}
                      className={style.photo}/>
-                <ProfileStatus status={props.status} upDateUserStatus={props.upDateUserStatus}/>
+                <ProfileStatus preloader={props.preloader} status={props.status} upDateUserStatus={props.upDateUserStatus}/>
                 <span className={style.styleName}> Full Name: {props.profile.fullName}</span>
                 <div>
                     <div>

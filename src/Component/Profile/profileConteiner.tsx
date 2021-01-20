@@ -37,6 +37,7 @@ export class ProfileContainer extends React.Component<PropsType> {
 
 
 export type MapStateType = {
+    preloader: boolean
     status: string
     profilePage: ProfileType | null
 }
@@ -46,10 +47,12 @@ type MapDispatchType = {
     getUser: (userId: number) => void
     getUserStatus: (userId: number) => void
     upDateUserStatus: (status: string) => void
+
 }
 
 const mapStateToProps = (state: AppStateType): MapStateType => {
     return {
+        preloader: state.profilePage.preloader,
         status: state.profilePage.status,
         profilePage: state.profilePage.profile
     }

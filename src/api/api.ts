@@ -15,7 +15,7 @@ type ConcatType = {
     mainLink: string
 }
 export type ProfileType = {
-    aboutMe?: string
+    aboutMe?: string | null
     contacts: ConcatType
     fullName: string
     lookingForAJob: boolean
@@ -89,7 +89,7 @@ export const profileAPI = {
             .then(response => response.data)
     },
     updateUserStatus(status: string) {
-        return instance.put<UserFollowAndUpdateStatus>(`profile/status`, {status: status})
+        return instance.put<UserFollowAndUpdateStatus>(`profile/status`, {status})
     }
 };
 
