@@ -14,13 +14,13 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
         <div>
             <form onSubmit={props.handleSubmit}>
                 <div>
-                    <Field placeholder={`Login`} name={'login'} component={'input'}/>
+                    <Field  component={'input'} placeholder={`Login`} name={'login'}/>
                 </div>
                 <div>
-                    <Field placeholder={`Password`} name={'password'} component={'input'}/>
+                    <Field component={'input'} placeholder={`Password`} name={'password'}/>
                 </div>
                 <div>
-                    <Field type={'checkbox'} name={'rememberMe'} component={'input'}/> remember me
+                    <Field component={'input'} type={'checkbox'} name={'rememberMe'} /> remember me
                 </div>
                 <div>
                     <button>Login</button>
@@ -37,13 +37,13 @@ const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm);
 
 
 export const Login = () => {
-    const onSubmit = (formData: FormDataType) => {
+   /* const onSubmit = (formData: FormDataType) => {
         console.log(formData)
-    }
+    }*/
     return(
         <div>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm /> {/*onSubmit={onSubmit}*/}
         </div>
     );
 }
