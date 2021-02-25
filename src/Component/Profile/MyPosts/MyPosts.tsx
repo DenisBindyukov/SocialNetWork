@@ -1,9 +1,9 @@
-import React, {ChangeEvent, KeyboardEvent} from "react";
+import React from "react";
 import style from './MyPosts.module.css'
 import Post from "./Posts/Posts";
-import {profilePageType} from "../../../Redux/State";
 import {Redirect} from "react-router";
 import {AddPostReduxForm, FormDataType} from "./AddPostFormRedux";
+import {profilePageType} from "../../../Redux/profile-reducer";
 
 
 type MyPostType = {

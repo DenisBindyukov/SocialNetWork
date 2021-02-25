@@ -1,6 +1,6 @@
 
-import {addNewMessageForDialogActionCreator, addPostForDialogsActionCreator, dialogsReducer,} from "./dialogs-reducer";
-import {addPostActionCreator, addNewMessageActionCreator, profileReducer} from './profile-reducer';
+import {addPostForDialogsActionCreator, dialogsReducer,} from "./dialogs-reducer";
+import {addPostActionCreator} from './profile-reducer';
 import {sidebarReducer} from "./sidebar-reducer";
 
 export type messagesType = {
@@ -44,9 +44,7 @@ export type StoreType = {
 
 export type ActionsTypes =
     | ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof addNewMessageActionCreator>
     | ReturnType<typeof addPostForDialogsActionCreator>
-    | ReturnType <typeof addNewMessageForDialogActionCreator>
 
 
 

@@ -24,7 +24,7 @@ const man = 'https://w7.pngwing.com/pngs/7/618/png-transparent-man-illustration-
     peopleLike: number
 }
 
-type profilePageType = {
+export type profilePageType = {
      status: string
     postDate: Array<postDateType>
     profile: ProfileType | null,
@@ -33,8 +33,7 @@ type profilePageType = {
 
 const initialState: profilePageType = {
      status: 'Change status',
-    postDate: [
-    ],
+    postDate: [],
     profile: null,
     preloader: false
 };
