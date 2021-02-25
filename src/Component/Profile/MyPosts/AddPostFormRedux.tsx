@@ -1,6 +1,6 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import style from "./MyPosts/MyPosts.module.css";
+import style from "./MyPosts.module.css";
 
 export type FormDataType = {
     message: string

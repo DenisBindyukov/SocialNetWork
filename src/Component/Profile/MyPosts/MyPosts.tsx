@@ -3,13 +3,12 @@ import style from './MyPosts.module.css'
 import Post from "./Posts/Posts";
 import {profilePageType} from "../../../Redux/State";
 import {Redirect} from "react-router";
-import {AddPostReduxForm, FormDataType} from "../AddPostFormRedux";
+import {AddPostReduxForm, FormDataType} from "./AddPostFormRedux";
 
 
 type MyPostType = {
     posts: profilePageType
-    onPostChange: (text: string) => void
-    addPost: () => void
+    addPost: (newMessageBody: string) => void
     isAuth: boolean
 }
 
@@ -21,20 +20,8 @@ const MyPost: React.FC<MyPostType> = (props) => {
                                                              peopleLike={el.peopleLike}
                                                              key={el.id}/>)
 
-    const addTaskHandler = () => {
-        props.addPost();
-    }
-    const newTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.onPostChange(e.currentTarget.value);
-    }
-    const keyPresHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === 'Enter') {
-            addTaskHandler();
-            e.preventDefault();
-        }
-    }
     const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
+        props.addPost(formData.message)
     }
 
     if (!props.isAuth) return <Redirect to={`/login`}/>

@@ -1,6 +1,6 @@
 import React from "react";
 import Dialog from "./Dialogs";
-import {addNewMessageForDialogActionCreator, addPostForDialogsActionCreator} from "../../Redux/dialogs-reducer";
+import { addPostForDialogsActionCreator} from "../../Redux/dialogs-reducer";
 import {AppStateType} from "../../Redux/redux-store";
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
@@ -9,8 +9,8 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 type mapDispatchToProps = {
-    addMessage: () => void
-    addText: (text: string) => void
+    addMessage: (newMessageBody: string) => void
+
 }
 
 type mapStateToProps = {
@@ -25,12 +25,9 @@ let mapStateToProps = (state: AppStateType): mapStateToProps => {
 
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToProps => {
     return {
-        addMessage: () => {
-            dispatch(addPostForDialogsActionCreator());
+        addMessage: (newMessageBody: string) => {
+            dispatch(addPostForDialogsActionCreator(newMessageBody));
         },
-        addText: (text: string) => {
-            dispatch(addNewMessageForDialogActionCreator(text));
-        }
     }
 }
 

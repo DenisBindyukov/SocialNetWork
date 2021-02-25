@@ -2,22 +2,18 @@ import {Dispatch} from "redux";
 import {profileAPI, ProfileType} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
-const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE';
 const SET_USER_PROFILE =  'SET_USER_PROFILE';
 const SET_STATUS =  'SET-STATUS';
 const TOGGLE_PRELOADER = `TOGGLE-PRELOADER`;
 
 type ActionsTypes =
     | ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof addNewMessageActionCreator>
     | ReturnType<typeof setProfile>
     | ReturnType<typeof setStatus>
     | ReturnType<typeof togglePreloader>
 
 
 const man = 'https://w7.pngwing.com/pngs/7/618/png-transparent-man-illustration-avatar-icon-fashion-men-avatar-face-fashion-girl-heroes-thumbnail.png';
-const woman = 'https://image.shutterstock.com/image-vector/avatar-business-woman-wearing-colorful-600w-445305412.jpg';
-
 
  type postDateType = {
     id: number
@@ -30,7 +26,6 @@ const woman = 'https://image.shutterstock.com/image-vector/avatar-business-woman
 
 type profilePageType = {
      status: string
-    messageForNewPost: string
     postDate: Array<postDateType>
     profile: ProfileType | null,
     preloader: boolean
@@ -38,7 +33,6 @@ type profilePageType = {
 
 const initialState: profilePageType = {
      status: 'Change status',
-    messageForNewPost: '',
     postDate: [
     ],
     profile: null,
@@ -48,32 +42,22 @@ const initialState: profilePageType = {
 
 export const profileReducer = (state: profilePageType = initialState, action: ActionsTypes): profilePageType => {
 
-    let stateCopy = {...state};
     switch (action.type) {
 
         case ADD_POST : {
             let userPost = {
                 id: new Date().getTime(),
-                message: state.messageForNewPost,
-                picture: state.messageForNewPost.length > 8 ? woman : man,
+                message: action.newMessageBody,
+                picture:  man,
                 like: 'https://www.meme-arsenal.com/memes/bffe79abf100ea1f114f4c916c7f874d.jpg',
                 dislike: 'https://gazeta.a42.ru/uploads/15f/15f17c40-0e1a-11e8-a4af-57fa39c27bbc.jpg',
                 peopleLike: 0
             };
 
-            if (state.messageForNewPost) {
-                stateCopy.postDate = [...state.postDate];
-                stateCopy.postDate.push(userPost);
-                stateCopy.messageForNewPost = '';
-            }
-            return stateCopy;
-        }
-
-        case ADD_NEW_MESSAGE : {
-            return {
-                ...state,
-                messageForNewPost: action.value
-            };
+               return {
+                   ...state,
+                   postDate: [...state.postDate,{...userPost}]
+               }
         }
         case SET_USER_PROFILE: {
             return {
@@ -98,8 +82,7 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
     }
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST} as const);
-export const addNewMessageActionCreator = (value: string) => ({type: ADD_NEW_MESSAGE, value} as const);
+export const addPostActionCreator = (newMessageBody: string) => ({type: ADD_POST, newMessageBody} as const);
 export const setProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const);
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const);
 export const togglePreloader = (value: boolean) => ({type: TOGGLE_PRELOADER, value} as const);

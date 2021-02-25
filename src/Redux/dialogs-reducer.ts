@@ -1,10 +1,8 @@
 import {ActionsTypes, dialogsPageType,} from "./State";
 
 const ADD_POST_HANDLER = 'ADD-POST-HANDLER';
-const ADD_NEW_MESSAGE_FOR_MESSAGE = 'ADD-NEW-MESSAGE-FOR-MESSAGE';
 
 const initialState = {
-    messageForNewPostMessage: '',
     dialogs: [
         {id: 1, name: 'Denis'},
         {id: 2, name: 'Nikolay'},
@@ -30,36 +28,22 @@ export const dialogsReducer = (state: dialogsPageType = initialState, action: Ac
 
         case ADD_POST_HANDLER : {
             let newMessage = {
-                id: new Date().getTime(), message: state.messageForNewPostMessage,
+                id: new Date().getTime(), message: action.newMessageBody,
             };
             let newDialog = {
                 id: new Date().getTime(), name: 'Denis'
             };
-
-            const copeState = {...state};
-
-            if (state.messageForNewPostMessage) {
-                copeState.messages = [...state.messages];
-                copeState.messages.push(newMessage);
-                copeState.dialogs = [...state.dialogs];
-                copeState.dialogs.push(newDialog);
-                copeState.messageForNewPostMessage = '';
-            }
-            return copeState;
+               return  {
+                    ...state,
+                    messages: [...state.messages,{...newMessage}],
+                   dialogs: [...state.dialogs,{...newDialog}]
+                }
+            return state;
         }
-
-        case ADD_NEW_MESSAGE_FOR_MESSAGE :
-            return {
-                ...state,
-                messageForNewPostMessage: action.message
-            };
-
         default :
             return state;
     }
 }
 
-export const addPostForDialogsActionCreator = () => ({type: ADD_POST_HANDLER} as const);
-export const addNewMessageForDialogActionCreator = (value: string) =>
-    ({type: ADD_NEW_MESSAGE_FOR_MESSAGE, message: value} as const);
+export const addPostForDialogsActionCreator = (newMessageBody: string) => ({type: ADD_POST_HANDLER, newMessageBody} as const);
 

@@ -20,7 +20,6 @@ export type postDateType = {
     peopleLike: number
 }
 export type dialogsPageType = {
-    messageForNewPostMessage: string
     dialogs: Array<dialogsType>
     messages: Array<messagesType>
 }
@@ -83,7 +82,6 @@ let store: StoreType = {
             ]
         },
         dialogsPage: {
-            messageForNewPostMessage: '',
             dialogs: [
                 {id: 1, name: 'Denis'},
                 {id: 2, name: 'Nikolay'},

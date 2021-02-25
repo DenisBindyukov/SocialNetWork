@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent} from "react";
+import React from "react";
 import style from './Dialogs.module.css';
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
@@ -7,8 +7,7 @@ import {FormDataType, MessageReduxForm} from "./Message/MessageReduxForm";
 
 type DialogsType = {
     dialogsPage: dialogsPageType
-    addMessage: () => void
-    addText: (text: string) => void
+    addMessage: (newMessageBody: string) => void
 }
 
 
@@ -17,20 +16,15 @@ const Dialog: React.FC<DialogsType> = (props) => {
     const users = props.dialogsPage.dialogs.map((el, index) => <DialogItem id={el.id} name={el.name} key={index}/>);
     const postElement = props.dialogsPage.messages.map(el => <Message message={el.message} id={el.id} key={el.id}/>);
 
-    const addMessageHandler = () => {
-        props.addMessage();
-    };
-    const addTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.addText(e.currentTarget.value);
-    }
-    const onKeyPressHandler = (event: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (event.key == 'Enter') {
-            addMessageHandler();
-            event.preventDefault();
-        }
-    }
+    // const onKeyPressHandler = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+    //     if (event.key == 'Enter') {
+    //         addMessageHandler();
+    //         event.preventDefault();
+    //     }
+    // }
+
     const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
+        props.addMessage(formData.message)
     }
 
     return (
