@@ -40,30 +40,6 @@ const initialState: profilePageType = {
      status: 'Change status',
     messageForNewPost: '',
     postDate: [
-        {
-            id: 1,
-            message: 'How are you ?',
-            picture: 'https://w7.pngwing.com/pngs/7/618/png-transparent-man-illustration-avatar-icon-fashion-men-avatar-face-fashion-girl-heroes-thumbnail.png',
-            like: 'https://www.meme-arsenal.com/memes/bffe79abf100ea1f114f4c916c7f874d.jpg',
-            dislike: 'https://gazeta.a42.ru/uploads/15f/15f17c40-0e1a-11e8-a4af-57fa39c27bbc.jpg',
-            peopleLike: 20,
-        },
-        {
-            id: 2,
-            message: `I'm fine, thank you!`,
-            picture: 'https://image.shutterstock.com/image-vector/avatar-business-woman-wearing-colorful-600w-445305412.jpg',
-            like: 'https://www.meme-arsenal.com/memes/bffe79abf100ea1f114f4c916c7f874d.jpg',
-            dislike: 'https://gazeta.a42.ru/uploads/15f/15f17c40-0e1a-11e8-a4af-57fa39c27bbc.jpg',
-            peopleLike: 13,
-        },
-        {
-            id: 3,
-            message: 'Nice!',
-            picture: 'https://w7.pngwing.com/pngs/7/618/png-transparent-man-illustration-avatar-icon-fashion-men-avatar-face-fashion-girl-heroes-thumbnail.png',
-            like: 'https://www.meme-arsenal.com/memes/bffe79abf100ea1f114f4c916c7f874d.jpg',
-            dislike: 'https://gazeta.a42.ru/uploads/15f/15f17c40-0e1a-11e8-a4af-57fa39c27bbc.jpg',
-            peopleLike: 246,
-        },
     ],
     profile: null,
     preloader: false

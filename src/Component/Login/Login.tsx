@@ -11,7 +11,6 @@ type FormDataType  = {
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
     return(
-        <div>
             <form onSubmit={props.handleSubmit}>
                 <div>
                     <Field  component={'input'} placeholder={`Login`} name={'login'}/>
@@ -26,24 +25,26 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                     <button>Login</button>
                 </div>
             </form>
-        </div>
     );
 }
 
 
-const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm);
+const LoginReduxForm = reduxForm<FormDataType>(
+    {
+        form: 'login'
+    })(LoginForm);
 
 
 
 
 export const Login = () => {
-   /* const onSubmit = (formData: FormDataType) => {
+    const onSubmit = (formData: FormDataType) => {
         console.log(formData)
-    }*/
+    }
     return(
         <div>
             <h1>Login</h1>
-            <LoginReduxForm /> {/*onSubmit={onSubmit}*/}
+            <LoginReduxForm onSubmit={onSubmit} />
         </div>
     );
 }

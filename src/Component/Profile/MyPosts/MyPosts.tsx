@@ -3,6 +3,7 @@ import style from './MyPosts.module.css'
 import Post from "./Posts/Posts";
 import {profilePageType} from "../../../Redux/State";
 import {Redirect} from "react-router";
+import {AddPostReduxForm, FormDataType} from "../AddPostFormRedux";
 
 
 type MyPostType = {
@@ -17,7 +18,8 @@ const MyPost: React.FC<MyPostType> = (props) => {
     const postElement = props.posts.postDate.map(el => <Post id={el.id} message={el.message}
                                                              picture={el.picture} like={el.like}
                                                              dislike={el.dislike}
-                                                             peopleLike={el.peopleLike}/>)
+                                                             peopleLike={el.peopleLike}
+                                                             key={el.id}/>)
 
     const addTaskHandler = () => {
         props.addPost();
@@ -31,6 +33,9 @@ const MyPost: React.FC<MyPostType> = (props) => {
             e.preventDefault();
         }
     }
+    const onSubmit = (formData: FormDataType) => {
+        console.log(formData)
+    }
 
     if (!props.isAuth) return <Redirect to={`/login`}/>
 
@@ -39,13 +44,7 @@ const MyPost: React.FC<MyPostType> = (props) => {
             <div className={style.postBlock}>
                 <h3>My post</h3>
                 <div>
-                    <div>
-                        <textarea value={props.posts.messageForNewPost} onChange={newTextHandler}
-                                  onKeyPress={keyPresHandler} className={style.superInput}> </textarea>
-                    </div>
-                    <div>
-                        <button className={style.myButton} onClick={addTaskHandler}>Add post</button>
-                    </div>
+                    <AddPostReduxForm onSubmit={onSubmit}/>
                 </div>
                 <div className={style.post}>
                     {postElement}
@@ -54,5 +53,6 @@ const MyPost: React.FC<MyPostType> = (props) => {
         </div>
     );
 }
+
 
 export default MyPost;

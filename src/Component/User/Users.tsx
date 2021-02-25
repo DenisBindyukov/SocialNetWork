@@ -31,9 +31,10 @@ export const Users: React.FC<UsersType> = (props) => {
 
             <div className={style.pages}>
                 {
-                    pages.map(p => {
+                    pages.map((p, index) => {
 
                         return <span
+                            key={index}
                             className={` ${props.currentPage === p && style.page_fatty} ${style.pages_span}`}
                             onClick={() => props.onPageChanged(p)}>{p}</span>
                     })

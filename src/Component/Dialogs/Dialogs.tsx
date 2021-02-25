@@ -3,6 +3,7 @@ import style from './Dialogs.module.css';
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 import {dialogsPageType} from "../../Redux/State";
+import {FormDataType, MessageReduxForm} from "./Message/MessageReduxForm";
 
 type DialogsType = {
     dialogsPage: dialogsPageType
@@ -13,8 +14,8 @@ type DialogsType = {
 
 const Dialog: React.FC<DialogsType> = (props) => {
 
-    const users = props.dialogsPage.dialogs.map(el => <DialogItem id={el.id} name={el.name}/>);
-    const postElement = props.dialogsPage.messages.map(el => <Message message={el.message} id={el.id}/>);
+    const users = props.dialogsPage.dialogs.map((el, index) => <DialogItem id={el.id} name={el.name} key={index}/>);
+    const postElement = props.dialogsPage.messages.map(el => <Message message={el.message} id={el.id} key={el.id}/>);
 
     const addMessageHandler = () => {
         props.addMessage();
@@ -27,6 +28,9 @@ const Dialog: React.FC<DialogsType> = (props) => {
             addMessageHandler();
             event.preventDefault();
         }
+    }
+    const onSubmit = (formData: FormDataType) => {
+        console.log(formData)
     }
 
     return (
@@ -41,17 +45,14 @@ const Dialog: React.FC<DialogsType> = (props) => {
                     postElement
                 }
                 <div className={style.block_control}>
-                    <textarea value={props.dialogsPage.messageForNewPostMessage} className={style.superInput}
-                              onChange={addTextHandler} onKeyPress={onKeyPressHandler}/>
-                    <div>
-                        <button className={style.myButton} onClick={addMessageHandler}>Add message</button>
-                    </div>
+                    <MessageReduxForm onSubmit={onSubmit}/>
                 </div>
             </div>
-
-
         </div>
     );
 }
+
+
+
 
 export default Dialog;
