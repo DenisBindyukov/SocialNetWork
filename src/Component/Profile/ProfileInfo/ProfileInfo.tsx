@@ -1,6 +1,6 @@
 import React from "react";
 import style from './ProfileInfo.module.css';
-import {Preloader} from "../../User/Preloader/Preload";
+import {Preloader} from "../../common/Preloader/Preload";
 import userPhoto from '../../../image/man-avatar-profile-vector-21372076.jpg';
 import workTrue from '../../../image/images true work.jpg';
 import workFalse from '../../../image/unnamed false work.jpg';

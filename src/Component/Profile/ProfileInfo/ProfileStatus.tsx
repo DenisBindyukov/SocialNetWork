@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
-import {Preloader} from "../../User/Preloader/Preload";
+import {Preloader} from "../../common/Preloader/Preload";
 
 type ProfileStatusType = {
     preloader: boolean

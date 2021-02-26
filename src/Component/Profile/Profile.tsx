@@ -2,7 +2,6 @@ import React from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {ProfileType} from "../../api/api";
-import {InjectedFormProps} from "redux-form";
 
 
 type ProfilePageType = {
@@ -24,3 +23,13 @@ const Profile: React.FC<ProfilePageType> = (props) => {
 }
 
 export default Profile;
+
+
+// <form onSubmit={props.handleSubmit}>
+//             <div>
+//                 <Field  component={TextArea}  name={'message'} validate={[requiredField,maxLengthUtil]}/>
+//             </div>
+//             <div>
+//                 <button className={style.myButton}>Add post</button>
+//             </div>
+//         </form>

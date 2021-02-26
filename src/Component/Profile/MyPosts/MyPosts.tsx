@@ -2,8 +2,8 @@ import React from "react";
 import style from './MyPosts.module.css'
 import Post from "./Posts/Posts";
 import {Redirect} from "react-router";
-import {AddPostReduxForm, FormDataType} from "./AddPostFormRedux";
 import {profilePageType} from "../../../Redux/profile-reducer";
+import {MultilineTextFields} from "../../common/MultilineTextFields";
 
 
 type MyPostType = {
@@ -20,19 +20,13 @@ const MyPost: React.FC<MyPostType> = (props) => {
                                                              peopleLike={el.peopleLike}
                                                              key={el.id}/>)
 
-    const onSubmit = (formData: FormDataType) => {
-        props.addPost(formData.message)
-    }
-
     if (!props.isAuth) return <Redirect to={`/login`}/>
 
     return (
         <div>
             <div className={style.postBlock}>
                 <h3>My post</h3>
-                <div>
-                    <AddPostReduxForm onSubmit={onSubmit}/>
-                </div>
+                    <MultilineTextFields sendNewPost={props.addPost}/>
                 <div className={style.post}>
                     {postElement}
                 </div>
