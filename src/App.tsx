@@ -10,12 +10,14 @@ import ProfileContainer from "./Component/Profile/profileConteiner";
 import HeaderContainer from "./Component/Header/HeaderContainer";
 import Navbar from "./Component/Navbar.tsx/Navbar";
 import {Login} from "./Component/Login/Login";
+import {ErrorSnackbar} from "./Component/ErrorSnackbar/ErrorSnackbar";
 
 
 function App() {
 
     return (
         <div className={'app-wrapper'}>
+            <ErrorSnackbar/>
             <HeaderContainer/>
             <Navbar/>
             <div className={'app-wrapper-content'}>

@@ -14,6 +14,7 @@ type MyPostType = {
 
 const MyPost: React.FC<MyPostType> = (props) => {
 
+
     const postElement = props.posts.postDate.map(el => <Post id={el.id} message={el.message}
                                                              picture={el.picture} like={el.like}
                                                              dislike={el.dislike}
@@ -22,12 +23,13 @@ const MyPost: React.FC<MyPostType> = (props) => {
 
     if (!props.isAuth) return <Redirect to={`/login`}/>
 
+
     return (
         <div>
             <div className={style.postBlock}>
                 <h3>My post</h3>
                     <MultilineTextFields sendNewPost={props.addPost}/>
-                <div className={style.post}>
+                <div className={style.post} >
                     {postElement}
                 </div>
             </div>

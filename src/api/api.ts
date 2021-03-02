@@ -51,12 +51,18 @@ const instance = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.0/`,
     withCredentials: true,
     headers: {'API-KEY': `a766318c-db12-4aae-b8b8-9ea1f33a00d7`}
-})
+});
 
 
 export const authRequest = {
     auth() {
-        return instance.get(`auth/me`)
+        return instance.get(`auth/me`);
+    },
+    login(email: string, password: string, rememberMe: boolean) {
+        return instance.post('/auth/login', {email, password,rememberMe });
+    },
+    logout() {
+        return instance.delete('/auth/login');
     }
 };
 
@@ -64,17 +70,17 @@ export const apiRequest = {
 
     getUsers(currentPage: number = 1, pageSize: number = 10) {
         return instance.get<UsersType>(`users?page=${currentPage}&count=${pageSize}`,)
-            .then(response => response.data)
+            .then(response => response.data);
     },
 
     follow(id: number) {
         return instance.post<UserFollowAndUpdateStatus>(`follow/${id}`)
-            .then(response => response.data)
+            .then(response => response.data);
     },
 
     unfollow(id: number) {
         return instance.delete<UserFollowAndUpdateStatus>(`follow/${id}`)
-            .then(response => response.data)
+            .then(response => response.data);
     }
 };
 
@@ -82,14 +88,14 @@ export const profileAPI = {
 
     getUser(userId: number) {
         return instance.get<ProfileType>(`profile/${userId}`)
-              .then(response => response.data)
+              .then(response => response.data);
     },
     getUserStatus(userId: number) {
         return instance.get<string>(`profile/status/${userId}`)
-            .then(response => response.data)
+            .then(response => response.data);
     },
     updateUserStatus(status: string) {
-        return instance.put<UserFollowAndUpdateStatus>(`profile/status`, {status})
+        return instance.put<UserFollowAndUpdateStatus>(`profile/status`, {status});
     }
 };
 

@@ -10,6 +10,10 @@ import {
     TextField
 } from "@material-ui/core";
 import React from "react";
+import {login} from "../../Redux/auth-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "../../Redux/redux-store";
+import {Redirect} from "react-router";
 
 type ErrorType = {
     email?: string
@@ -19,6 +23,9 @@ type ErrorType = {
 
 
 export const LoginForm = () => {
+    const isAuth = useSelector<AppStateType, boolean>((state) => state.auth.isAuth);
+    const dispatch = useDispatch();
+
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -26,7 +33,7 @@ export const LoginForm = () => {
             rememberMe: false
         },
         onSubmit: (values) => {
-            console.log(values)
+            dispatch(login(values.email, values.password, values.rememberMe))
             formik.resetForm();
         },
         validate: (values) => {
@@ -47,6 +54,10 @@ export const LoginForm = () => {
             return errors;
         }
     });
+
+    if (isAuth) {
+        return <Redirect to={'/profile'}/>
+    }
 
     return <Grid container justify="center">
         <Grid item xs={4}>

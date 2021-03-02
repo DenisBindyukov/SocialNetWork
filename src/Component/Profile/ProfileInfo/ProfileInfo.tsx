@@ -9,7 +9,7 @@ import {ProfileType} from "../../../api/api";
 
 
 type ProfileInfoType = {
-    preloader:boolean
+    preloader: boolean
     status: string
     profile: ProfileType | null
     upDateUserStatus: (status: string) => void
@@ -22,15 +22,11 @@ const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
     }
     return (
         <div>
-            {/*<div>*/}
-            {/*    <img*/}
-            {/*        src="https://freerangestock.com/sample/40062/person-connecting-and-sharing-using-social-media-networks.jpg"*/}
-            {/*        alt={'pict'}/>*/}
-            {/*</div>*/}
             <div className={style.descriptionBlock}>
                 <img src={props.profile.photos.large ? props.profile.photos.large : userPhoto}
                      className={style.photo}/>
-                <ProfileStatus preloader={props.preloader} status={props.status} upDateUserStatus={props.upDateUserStatus}/>
+                <ProfileStatus preloader={props.preloader} status={props.status}
+                               upDateUserStatus={props.upDateUserStatus}/>
                 <span className={style.styleName}> Full Name: {props.profile.fullName}</span>
                 <div>
                     <div>
