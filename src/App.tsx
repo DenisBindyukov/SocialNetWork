@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {Route} from "react-router-dom";
 import Setting from "./Component/Setting/Setting";
@@ -11,9 +11,17 @@ import HeaderContainer from "./Component/Header/HeaderContainer";
 import Navbar from "./Component/Navbar.tsx/Navbar";
 import {Login} from "./Component/Login/Login";
 import {ErrorSnackbar} from "./Component/ErrorSnackbar/ErrorSnackbar";
+import {auth} from "./Redux/auth-reducer";
+import {useDispatch} from "react-redux";
 
 
 function App() {
+
+     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(auth());
+    }, [])
 
     return (
         <div className={'app-wrapper'}>
