@@ -56,8 +56,8 @@ export const setAuthUserDate = (userId: number | null, email: string | null, log
 } as const);
 export const setAppError = (error:  null | string) => ({type: SET_ERROR,  payload: {error}} as const)
 
-export const auth = () => (dispatch: Dispatch<ActionsTypes>) => {
-    authRequest.auth()
+export const getAuthUserData = () => (dispatch: Dispatch<ActionsTypes>) => {
+    return authRequest.auth()
         .then(response => {
             if (response.data.resultCode === 0) {
                 const {id, email, login} = response.data.data
@@ -73,7 +73,7 @@ export const login = (email: string, password: string, rememberMe: boolean): Thu
     authRequest.login(email, password, rememberMe)
         .then((response) => {
             if (response.data.resultCode === 0) {
-                dispatch(auth());
+                dispatch(getAuthUserData());
             } else  {
                 dispatch(setAppError(response.data.messages.length ? response.data.messages[0] : 'Some error occurred'))
             }
