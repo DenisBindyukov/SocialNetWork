@@ -19,9 +19,9 @@ export const ProfileStatus: React.FC<ProfileStatusType> = (props) => {
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setStatusValue(e.currentTarget.value);
 
-   useEffect(() => {
-       setStatusValue(props.status)
-   }, [props.status]);
+   // useEffect(() => {
+   //     setStatusValue(props.status)
+   // }, [props.status]);
 
     if (props.preloader) {
         return <Preloader/>

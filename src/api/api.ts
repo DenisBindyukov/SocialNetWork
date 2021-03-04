@@ -50,7 +50,7 @@ type UsersType = {
 const instance = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.0/`,
     withCredentials: true,
-    headers: {'API-KEY': `a766318c-db12-4aae-b8b8-9ea1f33a00d7`}
+    headers: {'API-KEY': `e930ecd7-d580-44d2-ae4d-e8e672207dac`}
 });
 
 
