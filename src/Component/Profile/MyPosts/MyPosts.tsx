@@ -9,6 +9,7 @@ import {MultilineTextFields} from "../../common/MultilineTextFields";
 type MyPostType = {
     posts: profilePageType
     addPost: (newMessageBody: string) => void
+    deletePost: (id: number) => void
     isAuth: boolean
 }
 
@@ -19,7 +20,7 @@ const MyPost: React.FC<MyPostType> = React.memo((props) => {
                                                              picture={el.picture} like={el.like}
                                                              dislike={el.dislike}
                                                              peopleLike={el.peopleLike}
-                                                             key={el.id}/>)
+                                                             key={el.id} deletePost={props.deletePost}/>)
 
     if (!props.isAuth) return <Redirect to={`/login`}/>
 

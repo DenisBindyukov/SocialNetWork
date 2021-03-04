@@ -1,11 +1,11 @@
 import {Dispatch} from "redux";
 import {profileAPI, ProfileType} from "../api/api";
 
-const ADD_POST = 'ADD-POST';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_STATUS = 'SET-STATUS';
-const TOGGLE_PRELOADER = `TOGGLE-PRELOADER`;
-const DELETE_POST = `DELETE-POST`;
+const ADD_POST = 'profile/ADD-POST';
+const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
+const SET_STATUS = 'profile/SET-STATUS';
+const TOGGLE_PRELOADER = `profile/TOGGLE-PRELOADER`;
+const DELETE_POST = `profile/DELETE-POST`;
 
 type ActionsTypes =
     | ReturnType<typeof addPostActionCreator>

@@ -1,6 +1,6 @@
 import {ActionsTypes, dialogsPageType,} from "./State";
 
-const ADD_POST_HANDLER = 'ADD-POST-HANDLER';
+const ADD_POST_HANDLER = 'dialogs/ADD-POST-HANDLER';
 
 const initialState = {
     dialogs: [

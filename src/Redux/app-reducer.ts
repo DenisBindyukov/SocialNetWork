@@ -2,7 +2,7 @@ import {getAuthUserData} from "./auth-reducer";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./redux-store";
 
-const SET_INITIALIZED = 'SET-INITIALIZED-SUCCESS';
+const SET_INITIALIZED = 'app/SET-INITIALIZED-SUCCESS';
 
 type ActionsTypes =
     | ReturnType<typeof initializedSuccess>
