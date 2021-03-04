@@ -7,7 +7,7 @@ type HeaderType = {
     logout: () => void
 }
 
-export const Header: React.FC<HeaderType> = (props) => {
+export const Header: React.FC<HeaderType> = React.memo((props) => {
 
     return (
         <div className={style.header}>
@@ -23,5 +23,5 @@ export const Header: React.FC<HeaderType> = (props) => {
             </div>
         </div>
     );
-}
+})
 

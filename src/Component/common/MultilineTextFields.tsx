@@ -17,7 +17,7 @@ type MultilineTextFieldsType = {
     sendNewPost: (value: string) => void
 }
 
-export const MultilineTextFields: React.FC<MultilineTextFieldsType> = (props) => {
+export const MultilineTextFields: React.FC<MultilineTextFieldsType> = React.memo((props) => {
     const classes = useStyles();
     const [value, setValue] = React.useState('');
     const [error, SetError] = React.useState<null | string>(null);
@@ -68,7 +68,7 @@ export const MultilineTextFields: React.FC<MultilineTextFieldsType> = (props) =>
 
         </div>
     );
-}
+})
 
 
 // export const AddMessageForm = () => {

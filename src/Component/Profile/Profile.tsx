@@ -11,7 +11,7 @@ type ProfilePageType = {
     upDateUserStatus: (status: string) => void
 }
 
-const Profile: React.FC<ProfilePageType> = (props) => {
+const Profile: React.FC<ProfilePageType> = React.memo((props) => {
 
     return (
         <div>
@@ -20,7 +20,7 @@ const Profile: React.FC<ProfilePageType> = (props) => {
             <MyPostsContainer/>
         </div>
     );
-}
+})
 
 export default Profile;
 

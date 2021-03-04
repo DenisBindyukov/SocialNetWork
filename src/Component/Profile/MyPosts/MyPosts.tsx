@@ -12,7 +12,7 @@ type MyPostType = {
     isAuth: boolean
 }
 
-const MyPost: React.FC<MyPostType> = (props) => {
+const MyPost: React.FC<MyPostType> = React.memo((props) => {
 
 
     const postElement = props.posts.postDate.map(el => <Post id={el.id} message={el.message}
@@ -35,7 +35,7 @@ const MyPost: React.FC<MyPostType> = (props) => {
             </div>
         </div>
     );
-}
+})
 
 
 export default MyPost;

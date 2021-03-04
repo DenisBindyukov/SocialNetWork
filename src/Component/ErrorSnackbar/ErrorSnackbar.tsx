@@ -10,7 +10,7 @@ function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="filled" {...props} />
 }
 
-export function ErrorSnackbar() {
+export function ErrorSnackbar(): JSX.Element {
     //const [open, setOpen] = React.useState(true)
     const error = useSelector<AppStateType, string | null>(state => state.auth.error);
     const dispatch = useDispatch()

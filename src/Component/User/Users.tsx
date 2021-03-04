@@ -16,7 +16,7 @@ type UsersType = {
     toggleFollowingProgress: (isFetching: boolean, userId: number) => void
 }
 
-export const Users: React.FC<UsersType> = (props) => {
+export const Users: React.FC<UsersType> = React.memo((props) => {
 
     const pageCount = Math.ceil(props.totalCount / props.pageSize);
     const pages = [];
@@ -70,4 +70,4 @@ export const Users: React.FC<UsersType> = (props) => {
             }
         </div>
     );
-}
+})

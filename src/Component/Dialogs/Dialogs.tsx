@@ -11,7 +11,7 @@ type DialogsType = {
 }
 
 
-const Dialog: React.FC<DialogsType> = (props) => {
+const Dialog: React.FC<DialogsType> = React.memo((props) => {
 
     const users = props.dialogsPage.dialogs.map((el, index) => <DialogItem id={el.id} name={el.name} key={index}/>);
     const postElement = props.dialogsPage.messages.map(el => <Message message={el.message} id={el.id} key={el.id}/>);
@@ -33,7 +33,7 @@ const Dialog: React.FC<DialogsType> = (props) => {
             </div>
         </div>
     );
-}
+})
 
 
 
