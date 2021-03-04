@@ -2,20 +2,22 @@ import {Dispatch} from "redux";
 import {profileAPI, ProfileType} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
-const SET_USER_PROFILE =  'SET_USER_PROFILE';
-const SET_STATUS =  'SET-STATUS';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_STATUS = 'SET-STATUS';
 const TOGGLE_PRELOADER = `TOGGLE-PRELOADER`;
+const DELETE_POST = `DELETE-POST`;
 
 type ActionsTypes =
     | ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof setProfile>
     | ReturnType<typeof setStatus>
     | ReturnType<typeof togglePreloader>
+    | ReturnType<typeof deletePost>
 
 
 const man = 'https://w7.pngwing.com/pngs/7/618/png-transparent-man-illustration-avatar-icon-fashion-men-avatar-face-fashion-girl-heroes-thumbnail.png';
 
- type postDateType = {
+type postDateType = {
     id: number
     message: string
     picture: string
@@ -25,14 +27,14 @@ const man = 'https://w7.pngwing.com/pngs/7/618/png-transparent-man-illustration-
 }
 
 export type profilePageType = {
-     status: string
+    status: string
     postDate: Array<postDateType>
     profile: ProfileType | null,
     preloader: boolean
 }
 
 const initialState: profilePageType = {
-     status: 'Change status',
+    status: 'Change status',
     postDate: [],
     profile: null,
     preloader: false
@@ -47,16 +49,16 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
             let userPost = {
                 id: new Date().getTime(),
                 message: action.newMessageBody,
-                picture:  man,
+                picture: man,
                 like: 'https://www.meme-arsenal.com/memes/bffe79abf100ea1f114f4c916c7f874d.jpg',
                 dislike: 'https://gazeta.a42.ru/uploads/15f/15f17c40-0e1a-11e8-a4af-57fa39c27bbc.jpg',
                 peopleLike: 0
             };
 
-               return {
-                   ...state,
-                   postDate: [...state.postDate,{...userPost}]
-               }
+            return {
+                ...state,
+                postDate: [...state.postDate, {...userPost}]
+            }
         }
         case SET_USER_PROFILE: {
             return {
@@ -71,9 +73,15 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
             }
         }
         case TOGGLE_PRELOADER: {
-            return  {
+            return {
                 ...state,
                 preloader: action.value
+            }
+        }
+        case DELETE_POST: {
+            return {
+                ...state,
+                postDate: state.postDate.filter((el) => el.id !== action.id)
             }
         }
         default:
@@ -85,6 +93,7 @@ export const addPostActionCreator = (newMessageBody: string) => ({type: ADD_POST
 export const setProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const);
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const);
 export const togglePreloader = (value: boolean) => ({type: TOGGLE_PRELOADER, value} as const);
+export const deletePost = (id: number) => ({type: DELETE_POST, id} as const);
 
 export const getUser = (userId: number) => (dispatch: Dispatch) => {
 
@@ -106,7 +115,7 @@ export const upDateUserStatus = (status: string) => (dispatch: Dispatch) => {
     togglePreloader(true);
     profileAPI.updateUserStatus(status)
         .then(response => {
-            if(response.data.resultCode === 0) {
+            if (response.data.resultCode === 0) {
                 dispatch(setStatus(status))
             }
         });
