@@ -19,9 +19,9 @@ export const ProfileStatus: React.FC<ProfileStatusType> = (props) => {
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setStatusValue(e.currentTarget.value);
 
-   // useEffect(() => {
-   //     setStatusValue(props.status)
-   // }, [props.status]);
+    // useEffect(() => {
+    //     setStatusValue(props.status)
+    // }, [props.status]);
 
     if (props.preloader) {
         return <Preloader/>
@@ -29,11 +29,11 @@ export const ProfileStatus: React.FC<ProfileStatusType> = (props) => {
     return (
         <div>
             {editMode && <div>
-                <span onDoubleClick={changEditMode}>{props.status}</span>
+                <span>Status:</span> <span onDoubleClick={changEditMode}>{props.status}</span>
             </div>}
             {!editMode && <div>
-                <input onBlur={changeStatus} onChange={onChangeHandler} autoFocus type="text"
-                       value={statusValue}/>
+                <span>Status:</span> <input onBlur={changeStatus} onChange={onChangeHandler} autoFocus type="text"
+                                            value={statusValue}/>
             </div>}
         </div>
     );
