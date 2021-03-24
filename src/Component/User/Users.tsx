@@ -1,6 +1,5 @@
 import React from 'react';
 import style from './User.module.css'
-import userPhoto from '../../image/man-avatar-profile-vector-21372076.jpg'
 import {UserType} from "../../api/api";
 import {Paginator} from "../common/Paginator/Paginator";
 import {User} from "./User";
@@ -24,7 +23,7 @@ export const Users: React.FC<UsersType> = React.memo((props) => {
             <div className={style.pages}>
                 <Paginator
                     currentPage={props.currentPage}
-                    totalCount={props.totalCount}
+                    totalItemsCount={props.totalCount}
                     pageSize={props.pageSize}
                     onPageChanged={props.onPageChanged}/>
             </div>
