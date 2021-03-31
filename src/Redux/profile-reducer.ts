@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {profileAPI, ProfileType} from "../api/api";
+import {AppStateType} from "./redux-store";
 
 const ADD_POST = 'profile/ADD-POST';
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
@@ -119,5 +120,19 @@ export const upDateUserStatus = (status: string) => (dispatch: Dispatch) => {
                 dispatch(setStatus(status))
             }
         });
+    togglePreloader(false);
+};
+
+export const saveProfile = (profile: any) => async (dispatch: Dispatch, getState:() => AppStateType) => {
+    const state = getState()
+    const profileObj =
+
+    togglePreloader(true);
+   const data = await profileAPI.saveProfile(profile)
+        // .then(response => {
+        //     if (response.data.resultCode === 0) {
+        //         dispatch(setStatus(status))
+        //     }
+        // });
     togglePreloader(false);
 };

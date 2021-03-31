@@ -96,6 +96,9 @@ export const profileAPI = {
     },
     updateUserStatus(status: string) {
         return instance.put<UserFollowAndUpdateStatus>(`profile/status`, {status});
+    },
+    saveProfile(profile: any) {
+        return instance.put<UserFollowAndUpdateStatus>(`profile`, {});
     }
 };
 
