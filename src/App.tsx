@@ -14,6 +14,8 @@ import {initialize} from "./Redux/app-reducer";
 import {Preloader} from "./Component/common/Preloader/Preload";
 import HeaderContainer from "./Component/Header/HeaderContainer";
 
+
+//'Ленивая загрузка' позволяющая загружать компоненты при нажатии на ссылку компоненты т.е через NavLink
 const ProfileContainer = React.lazy(() => import('./Component/Profile/profileConteiner'));
 const DialogsContainer = React.lazy(() => import('./Component/Dialogs/DialogsContainer'));
 const UserContainer = React.lazy(() => import('./Component/User/UserContainer'));
@@ -40,6 +42,7 @@ class App extends Component<AppPropsType> {
                 <Navbar/>
                 <div className={'app-wrapper-content'}>
                     <Route path={'/profile/:userId?'} render={() => {
+                        // Suspense дополненая обёртка  к линивой загрузке.
                         return <React.Suspense fallback={<Preloader/>}>
                             <ProfileContainer/>
                         </React.Suspense>

@@ -11,8 +11,8 @@ export const ProfileStatus: React.FC<ProfileStatusType> = (props) => {
 
     const [editMode, setEditMode] = useState<boolean>(true);
     const [statusValue, setStatusValue] = useState<string>(props.status);
-    const changEditMode = () => setEditMode(!editMode);
 
+    const changEditMode = () => setEditMode(!editMode);
     const changeStatus = () => {
         props.upDateUserStatus(statusValue);
         setEditMode(!editMode);
