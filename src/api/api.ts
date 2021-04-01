@@ -67,9 +67,9 @@ export const authRequest = {
     auth() {
         return instance.get(`auth/me`);
     },
-    login(email: string, password: string, rememberMe: boolean) {
+    login(email: string, password: string, rememberMe: boolean = false, captcha: string | null = null) {
         return instance.post<UserFollowAndUpdateStatusAlsoLoginOrLogout<{userId: number}>>
-        ('auth/login', {email, password,rememberMe });
+        ('auth/login', {email, password,rememberMe, captcha });
     },
     logout() {
         return instance.delete<UserFollowAndUpdateStatusAlsoLoginOrLogout>('auth/login');

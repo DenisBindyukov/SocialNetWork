@@ -19,11 +19,13 @@ type ErrorType = {
     email?: string
     password?: string
     rememberMe?: boolean
+    "Please inter the symbols"?: string
 }
 
 
 export const LoginForm = () => {
     const isAuth = useSelector<AppStateType, boolean>((state) => state.auth.isAuth);
+    const captchaUrl = useSelector<AppStateType, string | null>((state) => state.auth.captchaUrl);
     const dispatch = useDispatch();
 
 
@@ -31,10 +33,11 @@ export const LoginForm = () => {
         initialValues: {
             email: '',
             password: '',
+            "Please inter the symbols": '',
             rememberMe: false
         },
         onSubmit: (values) => {
-            dispatch(login(values.email, values.password, values.rememberMe))
+            dispatch(login(values.email, values.password, values.rememberMe, values["Please inter the symbols"]))
             formik.resetForm();
         },
         validate: (values) => {
@@ -51,6 +54,7 @@ export const LoginForm = () => {
             } else if (values.password.length < 3) {
                 errors.password = 'Password must be at least 3 characters';
             }
+
 
             return errors;
         }
@@ -97,6 +101,15 @@ export const LoginForm = () => {
                             control={<Checkbox
                                 {...formik.getFieldProps('rememberMe')}/>}
                         />
+                        {captchaUrl && <img src={captchaUrl}/>}
+                        {
+                            captchaUrl && <TextField
+                                label="Please inter the symbols"
+                                margin="normal"
+                                type="text"
+                                {...formik.getFieldProps('Please inter the symbols')}
+                            />
+                        }
                         <Button type={'submit'} variant={'contained'} color={'primary'}>Login</Button>
                     </FormGroup>
                 </FormControl>
