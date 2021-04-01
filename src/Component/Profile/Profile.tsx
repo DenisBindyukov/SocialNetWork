@@ -2,6 +2,7 @@ import React from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {ProfileType} from "../../api/api";
+import {Redirect} from "react-router";
 
 
 type ProfilePageType = {
@@ -12,6 +13,8 @@ type ProfilePageType = {
 }
 
 const Profile: React.FC<ProfilePageType> = React.memo((props) => {
+
+
 
     return (
         <div>

@@ -23,7 +23,7 @@ export type ProfileType = {
     photos: photosType
     userId: number
 }
-type UserFollowAndUpdateStatus<T = {}> = {
+type UserFollowAndUpdateStatusAlsoLoginOrLogout<T = {}> = {
     resultCode: number
     messages: Array<string>
     data: T
@@ -46,6 +46,9 @@ type UsersType = {
     totalCount: number
 }
 
+type Captcha = {
+    url: string
+}
 
 const instance = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.0/`,
@@ -54,15 +57,22 @@ const instance = axios.create({
 });
 
 
+export const securityAPI = {
+    getCaptchaUrl() {
+        return instance.get<Captcha>(`security/get-captcha-url`)
+    }
+}
+
 export const authRequest = {
     auth() {
         return instance.get(`auth/me`);
     },
     login(email: string, password: string, rememberMe: boolean) {
-        return instance.post('/auth/login', {email, password,rememberMe });
+        return instance.post<UserFollowAndUpdateStatusAlsoLoginOrLogout<{userId: number}>>
+        ('auth/login', {email, password,rememberMe });
     },
     logout() {
-        return instance.delete('/auth/login');
+        return instance.delete<UserFollowAndUpdateStatusAlsoLoginOrLogout>('auth/login');
     }
 };
 
@@ -74,12 +84,12 @@ export const apiRequest = {
     },
 
     follow(id: number) {
-        return instance.post<UserFollowAndUpdateStatus>(`follow/${id}`)
+        return instance.post<UserFollowAndUpdateStatusAlsoLoginOrLogout>(`follow/${id}`)
             .then(response => response.data);
     },
 
     unfollow(id: number) {
-        return instance.delete<UserFollowAndUpdateStatus>(`follow/${id}`)
+        return instance.delete<UserFollowAndUpdateStatusAlsoLoginOrLogout>(`follow/${id}`)
             .then(response => response.data);
     }
 };
@@ -95,10 +105,10 @@ export const profileAPI = {
             .then(response => response.data);
     },
     updateUserStatus(status: string) {
-        return instance.put<UserFollowAndUpdateStatus>(`profile/status`, {status});
+        return instance.put<UserFollowAndUpdateStatusAlsoLoginOrLogout>(`profile/status`, {status});
     },
     saveProfile(profile: any) {
-        return instance.put<UserFollowAndUpdateStatus>(`profile`, {});
+        return instance.put<UserFollowAndUpdateStatusAlsoLoginOrLogout>(`profile`, {});
     }
 };
 

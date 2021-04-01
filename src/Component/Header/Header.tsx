@@ -1,4 +1,5 @@
 import React from "react";
+import Button from '@material-ui/core/Button';
 import style from './Header.module.css';
 
 type HeaderType = {
@@ -17,7 +18,9 @@ export const Header: React.FC<HeaderType> = React.memo((props) => {
                 {
                     props.isAuth && `User - ${props.login} online` &&
                     <div className={style.button_log}>
-                        <button onClick={props.logout}> Log out</button>
+                        <Button variant="outlined" color="secondary" onClick={props.logout}>
+                            Logout
+                        </Button>
                     </div>
                 }
             </div>

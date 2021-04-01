@@ -61,7 +61,6 @@ class App extends Component<AppPropsType> {
                     <Route path={'/news'} render={() => <News/>}/>
                     <Route path={'/login'} render={() => <Login/>}/>
                 </div>
-                )
             </div>
         );
     }
