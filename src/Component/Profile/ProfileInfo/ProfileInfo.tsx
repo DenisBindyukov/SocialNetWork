@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useMemo, useState} from "react";
 import style from './ProfileInfo.module.css';
 import {Preloader} from "../../common/Preloader/Preload";
 import userPhoto from '../../../image/man-avatar-profile-vector-21372076.jpg';
@@ -31,8 +31,9 @@ const ProfileInfo: React.FC<ProfileInfoType> = React.memo((props) => {
                      className={style.photo}/>
                 <div>
                     <Button variant="contained" color="primary" onClick={() => {
-                        setEditMode(state => !state)}}>
-                       Change
+                        setEditMode(state => !state)
+                    }}>
+                        Change
                     </Button>
                 </div>
                 <ProfileStatus preloader={props.preloader} status={props.status}

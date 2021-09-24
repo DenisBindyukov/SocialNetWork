@@ -14,9 +14,12 @@ import {initialize} from "./Redux/app-reducer";
 import {Preloader} from "./Component/common/Preloader/Preload";
 import HeaderContainer from "./Component/Header/HeaderContainer";
 import {setAppError} from "./Redux/auth-reducer";
+import ProfileContainer from "./Component/Profile/profileConteiner";
 
-// Suspense дополненая обёртка  к линивой загрузке.
-const ProfileContainer = React.lazy(() => import('./Component/Profile/profileConteiner'));
+// Suspense дополненая обёртка  к линивой загрузке.,
+//
+//
+// le/profileConteiner'));
 const DialogsContainer = React.lazy(() => import('./Component/Dialogs/DialogsContainer'));
 const UserContainer = React.lazy(() => import('./Component/User/UserContainer'));
 

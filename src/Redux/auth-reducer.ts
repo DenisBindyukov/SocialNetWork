@@ -33,7 +33,6 @@ const initialState: authReducerType = {
     isAuth: false,
     error: null,
     captchaUrl: null
-
 };
 
 
@@ -81,6 +80,7 @@ export const getAuthUserData = () => async (dispatch: Dispatch<ActionsTypes>) =>
 
     try {
         const response = await authRequest.auth()
+        debugger
         if (response.data.resultCode === 0) {
             const {id, email, login} = response.data.data
             dispatch(setAuthUserDate(id, email, login, true));

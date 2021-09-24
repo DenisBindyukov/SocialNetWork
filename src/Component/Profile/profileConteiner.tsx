@@ -19,7 +19,7 @@ type PropsType = RouteComponentProps<PatchParamsType> & OwnPropsType
 export class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
-        let userId = +this.props.match.params.userId
+        let userId: number = +this.props.match.params.userId
         if (!userId) {
             //@ts-ignore
             userId = this.props.authorizedUserId
